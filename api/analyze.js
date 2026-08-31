@@ -5,43 +5,47 @@ export default async function handler(req, res) {
     const { message, objective, gender, type, history, lang } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
-    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește din Vercel (Environment Variables)." });
+    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește din Vercel." });
 
-    // FOLOSIM EXACT MODELUL DIN SCREENSHOT-UL TĂU
+    // MODELUL TĂU DIN SCREENSHOT
     const modelName = "gemini-3-flash-preview"; 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey.trim()}`;
 
     const pronoun = gender === 'el' ? 'el' : 'ea';
-    let prompt = "";
 
+    let prompt = "";
     if (type === 'initial') {
       prompt = `Ești un psihoterapeut expert în relații. Utilizatorul vrea să-i scrie lui ${pronoun}: "${message}" cu scopul: "${objective}". 
-      Analizează draftul în 3 paragrafe calde, umane, fără titluri sau steluțe. Limba: ${lang}.`;
+      Analizează draftul în 3 paragrafe calde, umane, fără titluri sau steluțe: 1. Validare emoție. 2. Subtext (ce vrea de fapt). 3. Riscul trimiterii. 
+      Încheie cu o singură întrebare scurtă despre cum se simte acum. Limba: ${lang}.`;
     } else {
       prompt = `Ești un psihoterapeut într-un dialog de suport. Istoric: ${JSON.stringify(history)}. 
-      Utilizatorul spune: "${message}". Răspunde scurt, empatic, fără steluțe. Limba: ${lang}.`;
+      Utilizatorul spune: "${message}". Răspunde scurt (max 4 rânduri), empatic, fără steluțe sau markdown. 
+      Folosește tehnici din CBT sau ACT. Pune o întrebare proactivă la final. Limba: ${lang}.`;
     }
 
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
     });
 
     const data = await response.json();
 
-    // DACĂ GOOGLE DĂ EROARE, O TRIMITEM DIRECT LA UTILIZATOR SĂ O VEDEM
     if (data.error) {
-      return res.status(200).json({ text: "Eroare de la Google: " + data.error.message });
+      return res.status(200).json({ text: "Eroare Google: " + data.error.message });
     }
 
     if (data.candidates && data.candidates[0].content) {
-      return res.status(200).json({ text: data.candidates[0].content.parts[0].text });
+      const aiText = data.candidates[0].content.parts[0].text;
+      return res.status(200).json({ text: aiText });
     } else {
-      return res.status(200).json({ text: "Google a trimis un răspuns gol. Detalii: " + JSON.stringify(data) });
+      return res.status(200).json({ text: "Google a trimis un răspuns gol. Verifică Billing." });
     }
 
   } catch (error) {
-    return res.status(200).json({ text: "Eroare Server Vercel: " + error.message });
+    return res.status(200).json({ text: "Eroare Server: " + error.message });
   }
 }
