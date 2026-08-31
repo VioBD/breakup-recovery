@@ -115,7 +115,7 @@ export default async function handler(req, res) {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             maxOutputTokens: type === 'initial' ? 2048 : 1024,
-            thinkingConfig: { thinkingLevel: 'low' }
+            thinkingConfig: { thinkingLevel: type === 'initial' ? 'low' : 'minimal' }
           },
           safetySettings: [
             { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
