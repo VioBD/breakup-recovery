@@ -3,7 +3,7 @@
 // Upstash/Vercel KV if real distributed limiting is needed.
 const rateLimitStore = new Map();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 20;
+const RATE_LIMIT_MAX_REQUESTS = 60;
 
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY_TURNS = 20;
