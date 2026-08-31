@@ -179,7 +179,7 @@
                 <div>
                     <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">2. Draftul mesajului către fostul</label>
                     <label class="lang-en lang-hidden block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">2. Draft of the message to your ex</label>
-                    <textarea id="userMessage" class="w-full h-40 bg-brand-beige/30 border border-brand-dark/10 rounded-[2rem] p-8 text-lg outline-none focus:ring-1 focus:ring-brand-dark shadow-inner" placeholder="..."></textarea>
+                    <textarea id="userMessage" maxlength="2000" class="w-full h-40 bg-brand-beige/30 border border-brand-dark/10 rounded-[2rem] p-8 text-lg outline-none focus:ring-1 focus:ring-brand-dark shadow-inner" placeholder="..."></textarea>
                 </div>
 
                 <button onclick="runInitialAnalysis()" id="btnRun" class="w-full bg-brand-dark text-white py-6 rounded-full font-bold text-xl shadow-xl transition-all active:scale-95">
@@ -201,7 +201,7 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-end bg-white p-6 rounded-[2.5rem] border border-brand-dark/10 shadow-sm">
-                    <textarea id="chatInput" class="w-full md:flex-1 bg-transparent border-none px-4 py-2 outline-none text-base resize-none" placeholder="..." rows="2"></textarea>
+                    <textarea id="chatInput" maxlength="2000" class="w-full md:flex-1 bg-transparent border-none px-4 py-2 outline-none text-base resize-none" placeholder="..." rows="2"></textarea>
                     <button onclick="sendChatMessage()" id="btnChat" class="w-full md:w-auto bg-brand-dark text-white px-10 py-5 rounded-full font-bold hover:bg-black transition-all shadow-lg active:scale-95">
                         <span class="lang-ro">Trimite</span>
                         <span class="lang-en lang-hidden">Send</span>
@@ -326,16 +326,20 @@
                         type: 'initial', lang: currentLang 
                     })
                 });
+                if (!response.ok) throw new Error('http_' + response.status);
                 const data = await response.json();
-                
+                if (!data.text) throw new Error('empty_response');
+
                 document.getElementById('inputArea').classList.add('hidden');
                 document.getElementById('resultArea').classList.remove('hidden');
                 document.getElementById('initialAnalysisText').innerText = data.text;
-                
+
                 chatHistory.push({ role: 'assistant', content: data.text });
                 document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
             } catch (e) {
-                alert("Error.");
+                alert(currentLang === 'ro'
+                    ? "Nu am putut analiza mesajul chiar acum. Verifică conexiunea și încearcă din nou."
+                    : "We couldn't analyze your message right now. Check your connection and try again.");
             } finally {
                 btn.innerHTML = originalText;
                 btn.classList.remove('loading-pulse');
@@ -366,16 +370,21 @@
                         type: 'chat', history: chatHistory, lang: currentLang 
                     })
                 });
+                if (!response.ok) throw new Error('http_' + response.status);
                 const data = await response.json();
+                if (!data.text) throw new Error('empty_response');
                 appendMessage(data.text, 'ai');
                 chatHistory.push({ role: 'user', content: msg }, { role: 'assistant', content: data.text });
-                
+
                 messageCount++;
                 if(messageCount >= 1) {
                     document.getElementById('decisionButtons').classList.remove('hidden');
                 }
             } catch (e) {
-                appendMessage("Error.", 'ai');
+                const errMsg = currentLang === 'ro'
+                    ? "Nu am putut trimite mesajul. Verifică conexiunea și încearcă din nou."
+                    : "We couldn't send your message. Check your connection and try again.";
+                appendMessage(errMsg, 'ai');
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
