@@ -30,9 +30,9 @@ function containsCrisisSignal(message) {
 
 function crisisResponse(lang) {
   if (lang === 'en') {
-    return "What you just wrote sounds like a lot of pain, and I'm not equipped to support you with this the way you need right now. Please reach out to someone right now: if you're in the US, call or text 988; outside the US, find a local helpline at findahelpline.com. If you're in immediate danger, call your local emergency number. You don't have to go through this alone.";
+    return "What you just wrote sounds like a lot of pain, and I'm not equipped to support you with this the way you need right now. If you're in immediate danger, call your local emergency number (112 across the EU and Moldova, 911 in the US/Canada). For emotional support, find a helpline in your country at findahelpline.com (in the US: call or text 988). You don't have to go through this alone.";
   }
-  return "Ce ai scris sună ca o durere foarte mare, iar eu nu sunt echipat să te ajut cu asta așa cum ai nevoie acum. Te rog vorbește cu cineva chiar acum: Telefonul pentru prevenirea suicidului — 0800 801 200 (gratuit, non-stop, România) sau sună la 112 dacă ești în pericol imediat. Nu ești singur/ă.";
+  return "Ce ai scris sună ca o durere foarte mare, iar eu nu sunt echipat să te ajut cu asta așa cum ai nevoie acum. Te rog vorbește cu cineva chiar acum:\n— Pericol imediat: 112 (non-stop, gratuit, Moldova și România)\n— Moldova: Linia Verde pentru Prevenirea Suicidului — chat pe pentruviata.md sau 060806623 (luni–vineri, 19:00–21:00)\n— România: Telefonul pentru prevenirea suicidului — 0800 801 200 (gratuit, non-stop)\nNu ești singur/ă.";
 }
 
 function checkRateLimit(ip) {
@@ -113,7 +113,7 @@ export default async function handler(req, res) {
         signal: controller.signal,
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.9, maxOutputTokens: 500 },
+          generationConfig: { temperature: 0.9, maxOutputTokens: type === 'initial' ? 800 : 300 },
           safetySettings: [
             { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
             { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_ONLY_HIGH' },
@@ -132,8 +132,15 @@ export default async function handler(req, res) {
       return res.status(200).json({ text: "Eroare Google: " + data.error.message });
     }
 
-    if (data.candidates && data.candidates[0].content) {
-      const aiText = data.candidates[0].content.parts[0].text;
+    if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts) {
+      const aiText = data.candidates[0].content.parts.map(p => p.text || '').join('').trim();
+      if (!aiText) {
+        return res.status(200).json({
+          text: lang === 'en'
+            ? "I couldn't quite finish that thought — could you try sending it again?"
+            : "Nu am reușit să formulez un răspuns complet — poți încerca din nou?"
+        });
+      }
       return res.status(200).json({ text: aiText });
     } else if (data.candidates && data.candidates[0].finishReason === 'SAFETY') {
       return res.status(200).json({
