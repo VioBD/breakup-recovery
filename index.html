@@ -1,15 +1,151 @@
-<!-- ... (păstrăm tot începutul până la secțiunea Demo) ... -->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakup Recovery | Your space between impulse and decision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'brand-beige': '#F5F0E6', 'brand-dark': '#4A1523', 'brand-accent': '#EBD9C1' },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F5F0E6; color: #4A1523; scroll-behavior: smooth; }
+        .selected-option { border: 2px solid #4A1523 !important; background-color: #EBD9C1 !important; }
+        .lang-hidden { display: none !important; }
+        .step-number { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; opacity: 0.3; }
+        .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        #chatWindow::-webkit-scrollbar { width: 4px; }
+        #chatWindow::-webkit-scrollbar-thumb { background: #4A152322; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- SELECTOR LIMBĂ -->
+    <div class="fixed top-6 right-6 z-50 flex gap-2">
+        <button onclick="setLanguage('ro')" id="btn-ro" class="bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">RO</button>
+        <button onclick="setLanguage('en')" id="btn-en" class="bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg">EN</button>
+    </div>
+
+    <!-- NAV -->
+    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-brand-dark rounded-full"></div>
+            <span class="font-bold tracking-tighter text-xl italic font-serif">breakup recovery</span>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="max-w-6xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div class="lang-ro">
+            <span class="uppercase tracking-[0.3em] text-[10px] font-bold opacity-50 block">Când despărțirea încă doare</span>
+            <h1 class="text-6xl md:text-8xl font-serif italic mt-6 mb-8 leading-tight">Oprește-te.<br>Înainte să-i scrii.</h1>
+            <p class="max-w-2xl mx-auto text-xl italic font-serif opacity-80 leading-relaxed">"Nu vreau să mi se explice de ce nu ar trebui să-mi fie dor. Vreau să-mi pun dorul în cuvinte înainte să decid ce fac."</p>
+        </div>
+        <div class="lang-en lang-hidden">
+            <span class="uppercase tracking-[0.3em] text-[10px] font-bold opacity-50 block">When the breakup still hurts</span>
+            <h1 class="text-6xl md:text-8xl font-serif italic mt-6 mb-8 leading-tight">Stop.<br>Before you text.</h1>
+            <p class="max-w-2xl mx-auto text-xl italic font-serif opacity-80 leading-relaxed">"I don't want to be told why I shouldn't miss them. I want to put my longing into words before I decide what to do."</p>
+        </div>
+    </header>
+
+    <!-- PROCESUL -->
+    <section class="bg-brand-dark text-brand-beige py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="lang-ro text-3xl font-serif italic mb-16 text-center">Un proces simplu pentru când nu știi ce să faci.</h2>
+            <h2 class="lang-en lang-hidden text-3xl font-serif italic mb-16 text-center">A simple process for when you don't know what to do.</h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="space-y-4">
+                    <span class="step-number text-brand-accent">01</span>
+                    <div class="lang-ro">
+                        <h3 class="text-xl font-bold italic underline">Spune ce s-a întâmplat</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Poți scrie câteva cuvinte sau tot ce ai pe suflet. Nu te grăbește nimeni, nu te judecă nimeni.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h3 class="text-xl font-bold italic underline">Tell us what happened</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Write a few words or everything on your mind. No one rushes you.</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <span class="step-number text-brand-accent">02</span>
+                    <div class="lang-ro">
+                        <h3 class="text-xl font-bold italic underline">Înțelege mai clar situația</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Primești o întrebare relevantă și un pas practic. Nu primești un diagnostic.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h3 class="text-xl font-bold italic underline">Understand the situation</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Receive a relevant question and a practical step. No diagnosis.</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <span class="step-number text-brand-accent">03</span>
+                    <div class="lang-ro">
+                        <h3 class="text-xl font-bold italic underline">Alege ce faci mai departe</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Poți păstra mesajul ca ciornă, îl poți trimite sau poți reveni mai târziu.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h3 class="text-xl font-bold italic underline">Choose what to do next</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Keep the message as a draft, send it, or come back later.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOMENTE -->
+    <section class="max-w-6xl mx-auto px-6 py-24 border-b border-brand-dark/5">
+        <div class="grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="lang-ro text-5xl font-serif italic mb-12 leading-tight">Când nu știi ce să faci mai departe.</h2>
+                <h2 class="lang-en lang-hidden text-5xl font-serif italic mb-12 leading-tight">When you don't know what to do next.</h2>
+                <div class="space-y-10">
+                    <div class="lang-ro">
+                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">01. Când te gândești să-i scrii</h4>
+                        <p class="opacity-80 leading-relaxed">Scrii aici ce ai vrea să-i spui. Aplicația te ajută să înțelegi ce urmărești prin acel mesaj.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">01. When you're thinking of texting</h4>
+                        <p class="opacity-80 leading-relaxed">Write what you'd like to say. The app helps you understand your goal.</p>
+                    </div>
+                    <div class="lang-ro">
+                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">02. Când seara aduce înapoi toate gândurile</h4>
+                        <p class="opacity-80 leading-relaxed">Pui în cuvinte ce se întâmplă și primești un răspuns legat de situația ta.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">02. When the evening brings back all the thoughts</h4>
+                        <p class="opacity-80 leading-relaxed">Put what's happening into words and get a response tailored to your situation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center">
+                <div class="bg-brand-accent/20 p-12 rounded-[2.5rem] italic text-3xl font-serif leading-snug border border-brand-dark/5 text-center">
+                    <span class="lang-ro">"Nu vreau să mi se explice de ce nu ar trebui să-mi fie dor. Vreau să-mi pun dorul în cuvinte."</span>
+                    <span class="lang-en lang-hidden">"I don't want to be told why I shouldn't miss them. I want to put my longing into words."</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- DEMO SECTION -->
     <section id="demo" class="max-w-5xl mx-auto px-6 py-24">
         <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-brand-dark/5 space-y-12">
             
             <h2 class="lang-ro text-4xl font-serif italic text-center">Spațiul tău de dialog</h2>
+            <h2 class="lang-en lang-hidden text-4xl font-serif italic text-center">Your space for dialogue</h2>
 
             <!-- INPUT AREA -->
             <div id="inputArea" class="space-y-12 transition-all duration-500">
                 <div>
-                    <label class="block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">0. Despre cine este vorba?</label>
+                    <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">0. Despre cine este vorba?</label>
+                    <label class="lang-en lang-hidden block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">0. Who is this about?</label>
                     <div class="flex justify-center gap-4">
                         <button onclick="setGender('el')" id="gen-el" class="gen-btn px-10 py-3 border border-brand-dark/10 rounded-full bg-white text-sm italic font-serif transition-all hover:border-brand-dark">El / Him</button>
                         <button onclick="setGender('ea')" id="gen-ea" class="gen-btn px-10 py-3 border border-brand-dark/10 rounded-full bg-white text-sm italic font-serif transition-all hover:border-brand-dark">Ea / Her</button>
@@ -17,182 +153,262 @@
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">1. Ce speri să obții?</label>
+                    <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">1. Ce speri să obții?</label>
+                    <label class="lang-en lang-hidden block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">1. What do you hope to achieve?</label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <button onclick="selectObj(this, 'Claritate')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
-                            <span class="block font-serif italic text-xl underline">Un răspuns clar</span>
-                            <span class="text-[10px] opacity-60">Unde ne aflăm?</span>
+                        <button onclick="selectObj(this, 'Claritate', 'Clarity')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
+                            <span class="lang-ro block font-serif italic text-xl underline">Un răspuns clar</span>
+                            <span class="lang-en lang-hidden block font-serif italic text-xl underline">Clear answer</span>
+                            <span class="lang-ro text-[10px] opacity-60">Unde ne aflăm?</span>
+                            <span class="lang-en lang-hidden text-[10px] opacity-60">Where do we stand?</span>
                         </button>
-                        <button onclick="selectObj(this, 'Apropiere')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
-                            <span class="block font-serif italic text-xl underline">Apropiere</span>
-                            <span class="text-[10px] opacity-60">Vreau reluarea legăturii.</span>
+                        <button onclick="selectObj(this, 'Apropiere', 'Connection')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
+                            <span class="lang-ro block font-serif italic text-xl underline">Apropiere</span>
+                            <span class="lang-en lang-hidden block font-serif italic text-xl underline">Connection</span>
+                            <span class="lang-ro text-[10px] opacity-60">Vreau reluarea legăturii.</span>
+                            <span class="lang-en lang-hidden text-[10px] opacity-60">I want to reconnect.</span>
                         </button>
-                        <button onclick="selectObj(this, 'Descărcare')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
-                            <span class="block font-serif italic text-xl underline">Descărcare</span>
-                            <span class="text-[10px] opacity-60">Să spun ce am pe suflet.</span>
+                        <button onclick="selectObj(this, 'Descărcare', 'Venting')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
+                            <span class="lang-ro block font-serif italic text-xl underline">Descărcare</span>
+                            <span class="lang-en lang-hidden block font-serif italic text-xl underline">Venting</span>
+                            <span class="lang-ro text-[10px] opacity-60">Să spun ce am pe suflet.</span>
+                            <span class="lang-en lang-hidden text-[10px] opacity-60">Say what's on my mind.</span>
                         </button>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">2. Draftul mesajului către fostul</label>
-                    <textarea id="userMessage" class="w-full h-40 bg-brand-beige/30 border border-brand-dark/10 rounded-[2rem] p-8 text-lg outline-none focus:ring-1 focus:ring-brand-dark shadow-inner" placeholder="Scrie aici ce ai vrea să-i trimiți..."></textarea>
+                    <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">2. Draftul mesajului către fostul</label>
+                    <label class="lang-en lang-hidden block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest text-center">2. Draft of the message to your ex</label>
+                    <textarea id="userMessage" class="w-full h-40 bg-brand-beige/30 border border-brand-dark/10 rounded-[2rem] p-8 text-lg outline-none focus:ring-1 focus:ring-brand-dark shadow-inner" placeholder="..."></textarea>
                 </div>
 
                 <button onclick="runInitialAnalysis()" id="btnRun" class="w-full bg-brand-dark text-white py-6 rounded-full font-bold text-xl shadow-xl transition-all active:scale-95">
-                    Analizează draftul →
+                    <span class="lang-ro">Analizează draftul →</span>
+                    <span class="lang-en lang-hidden">Analyze draft →</span>
                 </button>
             </div>
 
             <!-- RESULT & CHAT AREA -->
             <div id="resultArea" class="hidden space-y-8">
-                <!-- Analiza inițială stilizată ca "Reflection Card" -->
                 <div class="bg-brand-dark text-brand-beige p-10 rounded-[3rem] shadow-2xl border-l-8 border-brand-accent">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block">Perspectiva Psihoterapeutului</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block lang-ro">Perspectiva Psihoterapeutului</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block lang-en lang-hidden">Psychotherapist's Perspective</span>
                     <div id="initialAnalysisText" class="text-xl italic leading-relaxed whitespace-pre-wrap opacity-95 font-serif"></div>
                 </div>
 
-                <!-- Chat Window -->
-                <div id="chatWindow" class="h-[500px] overflow-y-auto p-8 bg-brand-beige/20 rounded-[3rem] space-y-6 border border-brand-dark/5 shadow-inner">
+                <div id="chatWindow" class="h-[500px] overflow-y-auto p-8 bg-brand-beige/20 rounded-[3rem] space-y-6 border border-brand-dark/5 shadow-inner text-sm">
                     <!-- Mesajele apar aici -->
                 </div>
 
-                <!-- Input Chat cu Loading State -->
                 <div class="flex gap-4 items-end">
-                    <textarea id="chatInput" class="flex-1 bg-white border border-brand-dark/10 rounded-[2rem] px-8 py-5 outline-none focus:ring-1 focus:ring-brand-dark shadow-sm resize-none" placeholder="Răspunde sau pune o întrebare..." rows="1"></textarea>
+                    <textarea id="chatInput" class="flex-1 bg-white border border-brand-dark/10 rounded-[2rem] px-8 py-5 outline-none focus:ring-1 focus:ring-brand-dark shadow-sm resize-none" placeholder="..." rows="1"></textarea>
                     <button onclick="sendChatMessage()" id="btnChat" class="bg-brand-dark text-white px-10 py-5 rounded-full font-bold hover:bg-black transition-all shadow-lg active:scale-95">
-                        Trimite
+                        <span class="lang-ro">Trimite</span>
+                        <span class="lang-en lang-hidden">Send</span>
                     </button>
                 </div>
 
-                <!-- BUTOANE DE DECIZIE (Apar după câteva mesaje) -->
                 <div id="decisionButtons" class="hidden pt-8 border-t border-brand-dark/10 flex flex-wrap justify-center gap-4">
-                    <button onclick="finalDecision('no-send')" class="bg-green-800 text-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest shadow-lg">Am decis să NU trimit</button>
-                    <button onclick="finalDecision('send-anyway')" class="bg-white text-brand-dark border border-brand-dark px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest shadow-lg">Vreau să trimit oricum</button>
-                    <button onclick="location.reload()" class="opacity-40 text-[10px] uppercase font-bold tracking-widest w-full mt-4">O iau de la capăt cu alt gând</button>
+                    <button onclick="finalDecision('no-send')" class="bg-green-800 text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg">
+                        <span class="lang-ro">Am decis să NU trimit</span>
+                        <span class="lang-en lang-hidden">I decided NOT to send</span>
+                    </button>
+                    <button onclick="finalDecision('send-anyway')" class="bg-white text-brand-dark border border-brand-dark px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg">
+                        <span class="lang-ro">Vreau să trimit oricum</span>
+                        <span class="lang-en lang-hidden">I want to send anyway</span>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- ... (păstrăm restul secțiunilor) ... -->
+    <!-- TRUST & LIMITS -->
+    <section class="max-w-6xl mx-auto px-6 py-20 border-y border-brand-dark/10">
+        <div class="text-center mb-16">
+            <h2 class="lang-ro text-5xl font-serif italic">Îți respectă povestea.</h2>
+            <h2 class="lang-en lang-hidden text-5xl font-serif italic">Respecting your story.</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 text-sm">
+            <div class="p-8 bg-white/50 rounded-2xl">
+                <h4 class="lang-ro font-bold uppercase mb-4">Fără profil public</h4>
+                <h4 class="lang-en lang-hidden font-bold uppercase mb-4">No public profile</h4>
+                <p class="opacity-70 lang-ro">Nu trebuie să demonstrezi nimic nimănui.</p>
+                <p class="opacity-70 lang-en lang-hidden">No need to prove anything to anyone.</p>
+            </div>
+            <div class="p-8 bg-white/50 rounded-2xl border-2 border-brand-dark/5">
+                <h4 class="lang-ro font-bold uppercase mb-4 text-red-900">Nu înlocuiește terapia</h4>
+                <h4 class="lang-en lang-hidden font-bold uppercase mb-4 text-red-900">Not a replacement for therapy</h4>
+                <p class="opacity-70 lang-ro">Este un suport de moment pentru claritate.</p>
+                <p class="opacity-70 lang-en lang-hidden">A momentary support for clarity.</p>
+            </div>
+            <div class="p-8 bg-white/50 rounded-2xl">
+                <h4 class="lang-ro font-bold uppercase mb-4">Fără soluții magice</h4>
+                <h4 class="lang-en lang-hidden font-bold uppercase mb-4">No magic solutions</h4>
+                <p class="opacity-70 lang-ro">Scopul este să nu acționezi la impuls.</p>
+                <p class="opacity-70 lang-en lang-hidden">The goal is not to act on impulse.</p>
+            </div>
+        </div>
+    </section>
 
-<script>
-    let selectedGender = "";
-    let selectedObjective = "";
-    let chatHistory = [];
-    let messageCount = 0;
+    <!-- WAITLIST -->
+    <section id="waitlist" class="bg-brand-dark text-brand-beige py-32 px-6 text-center">
+        <div class="max-w-xl mx-auto">
+            <h2 class="lang-ro text-4xl font-serif italic mb-6 leading-tight">Vrei să știi când lansăm varianta PRO?</h2>
+            <h2 class="lang-en lang-hidden text-4xl font-serif italic mb-6 leading-tight">Want to know when we launch PRO?</h2>
+            <form action="https://formspree.io/f/xzebzpll" method="POST" class="space-y-4">
+                <input type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none">
+                <button type="submit" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors uppercase tracking-widest">
+                    <span class="lang-ro">Înscrie-mă</span>
+                    <span class="lang-en lang-hidden">Sign me up</span>
+                </button>
+            </form>
+        </div>
+    </section>
 
-    function setGender(gen) {
-        selectedGender = gen;
-        document.querySelectorAll('.gen-btn').forEach(b => b.classList.remove('selected-option'));
-        document.getElementById('gen-' + gen).classList.add('selected-option');
-    }
+    <footer class="p-12 text-center text-[10px] uppercase tracking-[0.3em] opacity-30 font-bold italic">
+        &copy; 2026 Breakup Recovery
+    </footer>
 
-    function selectObj(btn, obj) {
-        selectedObjective = obj;
-        document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected-option'));
-        btn.classList.add('selected-option');
-    }
+    <script>
+        let currentLang = 'ro';
+        let selectedGender = "";
+        let selectedObjective = "";
+        let chatHistory = [];
+        let messageCount = 0;
 
-    async function runInitialAnalysis() {
-        const m = document.getElementById('userMessage').value;
-        if(!m || !selectedGender || !selectedObjective) {
-            alert("Te rugăm să completezi toți pașii."); return;
-        }
-
-        const btn = document.getElementById('btnRun');
-        btn.innerText = "Analizăm situația...";
-        btn.classList.add('loading-pulse');
-        btn.disabled = true;
-
-        try {
-            const response = await fetch('/api/analyze', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    message: m, objective: selectedObjective, gender: selectedGender, 
-                    type: 'initial', lang: 'ro' 
-                })
-            });
-            const data = await response.json();
-            
-            document.getElementById('inputArea').classList.add('hidden');
-            document.getElementById('resultArea').classList.remove('hidden');
-            document.getElementById('initialAnalysisText').innerText = data.text;
-            
-            chatHistory.push({ role: 'assistant', content: data.text });
-            document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
-        } catch (e) {
-            alert("Eroare de conexiune.");
-        }
-    }
-
-    async function sendChatMessage() {
-        const input = document.getElementById('chatInput');
-        const btn = document.getElementById('btnChat');
-        const msg = input.value;
-        if(!msg) return;
-
-        appendMessage(msg, 'user');
-        input.value = "";
-        
-        // Feedback vizual pe butonul de chat
-        btn.innerText = "...";
-        btn.disabled = true;
-        btn.classList.add('loading-pulse');
-
-        try {
-            const response = await fetch('/api/analyze', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    message: msg, gender: selectedGender, 
-                    type: 'chat', history: chatHistory, lang: 'ro' 
-                })
-            });
-            const data = await response.json();
-            appendMessage(data.text, 'ai');
-            chatHistory.push({ role: 'user', content: msg }, { role: 'assistant', content: data.text });
-            
-            messageCount++;
-            // Arătăm butoanele de decizie după 1-2 schimburi de mesaje
-            if(messageCount >= 1) {
-                document.getElementById('decisionButtons').classList.remove('hidden');
+        function setLanguage(lang) {
+            currentLang = lang;
+            const btnRo = document.getElementById('btn-ro');
+            const btnEn = document.getElementById('btn-en');
+            if(lang === 'ro') {
+                btnRo.className = "bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                btnEn.className = "bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                document.querySelectorAll('.lang-ro').forEach(el => el.classList.remove('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('lang-hidden'));
+            } else {
+                btnEn.className = "bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                btnRo.className = "bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                document.querySelectorAll('.lang-ro').forEach(el => el.classList.add('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('lang-hidden'));
             }
-        } catch (e) {
-            appendMessage("Eroare de conexiune.", 'ai');
-        } finally {
-            btn.innerText = "Trimite";
-            btn.disabled = false;
-            btn.classList.remove('loading-pulse');
         }
-    }
 
-    function appendMessage(text, side) {
-        const win = document.getElementById('chatWindow');
-        const div = document.createElement('div');
-        div.className = side === 'user' 
-            ? "bg-brand-accent/30 p-6 rounded-[2rem] rounded-tr-none ml-auto max-w-[85%] text-base shadow-sm"
-            : "bg-brand-dark text-brand-beige p-8 rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-base italic whitespace-pre-wrap shadow-md leading-relaxed";
-        div.innerText = text;
-        win.appendChild(div);
-        win.scrollTop = win.scrollHeight;
-    }
-
-    function finalDecision(type) {
-        const win = document.getElementById('chatWindow');
-        if(type === 'no-send') {
-            appendMessage("Am decis să NU trimit mesajul. Simt că e mai bine pentru liniștea mea.", 'user');
-            setTimeout(() => {
-                appendMessage("Aceasta este o victorie uriașă pentru tine. Ai ales să îți protejezi energia și demnitatea. Sunt mândru de tine. Cum te simți acum că ai luat această decizie?", 'ai');
-            }, 1000);
-        } else {
-            appendMessage("Vreau să-l trimit oricum. Simt că am nevoie de acest ultim contact.", 'user');
-            setTimeout(() => {
-                appendMessage("Înțeleg. Dacă simți că este necesar pentru încheierea ta, fă-o cu blândețe față de tine. Asigură-te că nu aștepți un anumit răspuns, ci o faci doar pentru a pune punct. Vrei să te ajut să reformulezi mesajul ca să sune cât mai matur și demn?", 'ai');
-            }, 1000);
+        function setGender(gen) {
+            selectedGender = gen;
+            document.querySelectorAll('.gen-btn').forEach(b => b.classList.remove('selected-option'));
+            document.getElementById('gen-' + gen).classList.add('selected-option');
         }
-        document.getElementById('decisionButtons').classList.add('hidden');
-    }
-</script>
+
+        function selectObj(btn, roVal, enVal) {
+            selectedObjective = (currentLang === 'ro') ? roVal : enVal;
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected-option'));
+            btn.classList.add('selected-option');
+        }
+
+        async function runInitialAnalysis() {
+            const m = document.getElementById('userMessage').value;
+            if(!m || !selectedGender || !selectedObjective) {
+                alert(currentLang === 'ro' ? "Te rugăm să completezi toți pașii." : "Please complete all steps."); return;
+            }
+
+            const btn = document.getElementById('btnRun');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = currentLang === 'ro' ? "Analizăm situația..." : "Analyzing...";
+            btn.classList.add('loading-pulse');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        message: m, objective: selectedObjective, gender: selectedGender, 
+                        type: 'initial', lang: currentLang 
+                    })
+                });
+                const data = await response.json();
+                
+                document.getElementById('inputArea').classList.add('hidden');
+                document.getElementById('resultArea').classList.remove('hidden');
+                document.getElementById('initialAnalysisText').innerText = data.text;
+                
+                chatHistory.push({ role: 'assistant', content: data.text });
+                document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+            } catch (e) {
+                alert("Error.");
+            }
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const btn = document.getElementById('btnChat');
+            const msg = input.value;
+            if(!msg) return;
+
+            appendMessage(msg, 'user');
+            input.value = "";
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "...";
+            btn.disabled = true;
+            btn.classList.add('loading-pulse');
+
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        message: msg, gender: selectedGender, 
+                        type: 'chat', history: chatHistory, lang: currentLang 
+                    })
+                });
+                const data = await response.json();
+                appendMessage(data.text, 'ai');
+                chatHistory.push({ role: 'user', content: msg }, { role: 'assistant', content: data.text });
+                
+                messageCount++;
+                if(messageCount >= 1) {
+                    document.getElementById('decisionButtons').classList.remove('hidden');
+                }
+            } catch (e) {
+                appendMessage("Error.", 'ai');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.classList.remove('loading-pulse');
+            }
+        }
+
+        function appendMessage(text, side) {
+            const win = document.getElementById('chatWindow');
+            const div = document.createElement('div');
+            div.className = side === 'user' 
+                ? "bg-brand-accent/30 p-6 rounded-[2rem] rounded-tr-none ml-auto max-w-[85%] text-base shadow-sm"
+                : "bg-brand-dark text-brand-beige p-8 rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-base italic whitespace-pre-wrap shadow-md leading-relaxed";
+            div.innerText = text;
+            win.appendChild(div);
+            win.scrollTop = win.scrollHeight;
+        }
+
+        function finalDecision(type) {
+            if(type === 'no-send') {
+                const msg = currentLang === 'ro' ? "Am decis să NU trimit mesajul. Simt că e mai bine pentru liniștea mea." : "I decided NOT to send the message. I feel it's better for my peace.";
+                appendMessage(msg, 'user');
+                setTimeout(() => {
+                    const res = currentLang === 'ro' ? "Aceasta este o victorie uriașă pentru tine. Ai ales să îți protejezi energia și demnitatea. Sunt mândru de tine. Cum te simți acum că ai luat această decizie?" : "This is a huge victory for you. You chose to protect your energy and dignity. I'm proud of you. How do you feel now that you've made this decision?";
+                    appendMessage(res, 'ai');
+                }, 1000);
+            } else {
+                const msg = currentLang === 'ro' ? "Vreau să-l trimit oricum. Simt că am nevoie de acest ultim contact." : "I want to send it anyway. I feel I need this last contact.";
+                appendMessage(msg, 'user');
+                setTimeout(() => {
+                    const res = currentLang === 'ro' ? "Înțeleg. Dacă simți că este necesar pentru încheierea ta, fă-o cu blândețe față de tine. Asigură-te că nu aștepți un anumit răspuns, ci o faci doar pentru a pune punct. Vrei să te ajut să reformulezi mesajul ca să sune cât mai matur și demn?" : "I understand. If you feel it's necessary for your closure, do it with kindness toward yourself. Make sure you're not waiting for a specific answer, but doing it just to put an end to it. Do you want me to help you rephrase the message to sound as mature and dignified as possible?";
+                    appendMessage(res, 'ai');
+                }, 1000);
+            }
+            document.getElementById('decisionButtons').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
