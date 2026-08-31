@@ -5,9 +5,9 @@ export default async function handler(req, res) {
     const { message, objective, gender, type, history, lang } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
-    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește din Vercel." });
+    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește." });
 
-    // REVENIM LA MODELUL CARE A FUNCȚIONAT: gemini-3-flash-preview
+    // FOLOSIM EXACT NUMELE DIN SCREENSHOT: gemini-3-flash-preview
     const modelName = "gemini-3-flash-preview"; 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey.trim()}`;
 
@@ -18,11 +18,11 @@ export default async function handler(req, res) {
       prompt = `Ești un psihoterapeut expert. Utilizatorul vrea să-i scrie lui ${pronoun}: "${message}" cu scopul: "${objective}". 
       Analizează draftul în 3 paragrafe calde: 1. Validare emoție. 2. Subtext (ce vrea de fapt). 3. Riscul trimiterii. 
       NU folosi steluțe, titluri sau formatare markdown. Doar text simplu și uman. 
-      Încheie cu o singură întrebare scurtă despre cum se simte acum.`;
+      Încheie cu o singură întrebare scurtă despre cum se simte acum. Limba: ${lang}.`;
     } else {
       prompt = `Ești un psihoterapeut într-un dialog de suport. Istoric: ${JSON.stringify(history)}. 
       Utilizatorul spune: "${message}". Răspunde scurt (max 4 rânduri), empatic, fără steluțe sau markdown. 
-      Folosește tehnici din CBT sau ACT. Pune o întrebare proactivă la final.`;
+      Folosește tehnici din CBT sau ACT. Pune o întrebare proactivă la final. Limba: ${lang}.`;
     }
 
     const response = await fetch(url, {
@@ -36,6 +36,10 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (data.error) {
+      // Dacă dă eroare de Quota, trimitem un mesaj mai elegant utilizatorului
+      if (data.error.message.includes("Quota")) {
+        return res.status(200).json({ text: "Sunt puțin ocupat cu mulți utilizatori acum. Te rog să aștepți 30 de secunde și să încerci din nou." });
+      }
       return res.status(200).json({ text: "Eroare Google: " + data.error.message });
     }
 
@@ -43,10 +47,10 @@ export default async function handler(req, res) {
       const aiText = data.candidates[0].content.parts[0].text;
       return res.status(200).json({ text: aiText });
     } else {
-      return res.status(200).json({ text: "AI-ul nu a putut genera un răspuns. Încearcă din nou." });
+      return res.status(200).json({ text: "Te rugăm să reformulezi sau să aștepți un moment." });
     }
 
   } catch (error) {
-    return res.status(200).json({ text: "Eroare server: " + error.message });
+    return res.status(200).json({ text: "Eroare server." });
   }
 }
