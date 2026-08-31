@@ -113,7 +113,10 @@ export default async function handler(req, res) {
         signal: controller.signal,
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.9, maxOutputTokens: type === 'initial' ? 800 : 300 },
+          generationConfig: {
+            maxOutputTokens: type === 'initial' ? 2048 : 1024,
+            thinkingConfig: { thinkingLevel: 'low' }
+          },
           safetySettings: [
             { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
             { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_ONLY_HIGH' },
