@@ -2,18 +2,12 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { message, objective, lang, gender } = req.body;
+    const { message, objective, lang, gender, history } = req.body; // Am adăugat history
     const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește." });
-
     const modelName = "gemini-3-flash-preview"; 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey.trim()}`;
 
-    // Definirea limbajului în funcție de gen
     const pronoun = gender === 'el' ? 'el' : 'ea';
-    const possessive = gender === 'el' ? 'lui' : 'ei';
-    const accusative = gender === 'el' ? 'îl' : 'o';
 
     const response = await fetch(url, {
       method: 'POST',
@@ -22,23 +16,26 @@ export default async function handler(req, res) {
         contents: [{
           parts: [{ 
             text: `
-              Ești un prieten foarte apropiat și un psiholog empatic. 
+              Ești un psihoterapeut expert în relații și un prieten empatic. 
               Utilizatorul trece printr-o despărțire și vrea să îi scrie lui ${pronoun}: "${message}".
-              Scopul utilizatorului: "${objective}".
+              Scopul: "${objective}".
               Limba: ${lang}.
+              Istoric conversație: ${JSON.stringify(history)}
 
-              REGULI DE CONECTARE ȘI TON:
-              1. Folosește EXCLUSIV genul ${gender === 'el' ? 'masculin (el, lui, îl)' : 'feminin (ea, ei, o)'}. NU folosi "el/ea" sau "lui/ei".
-              2. Vorbește direct cu utilizatorul, ca într-o conversație privată.
-              3. Dacă mesajul utilizatorului este scurt sau impulsiv, începe prin a-l întreba ceva care să-l facă să reflecteze, de exemplu: "Înainte să analizăm ce ai scris, crezi că ${pronoun} are în acest moment capacitatea de a-ți oferi răspunsul pe care îl cauți?"
-              4. Nu folosi titluri sau formatări rigide. Folosește paragrafe calde.
+              MISIUNEA TA:
+              Poartă un dialog terapeutic. Nu livra doar un raport. Dacă e prima interacțiune, pune o întrebare de conectare. Dacă e o continuare, aprofundează subiectul.
 
-              STRUCTURĂ RĂSPUNS:
-              - O frază de conectare umană.
-              - O perspectivă asupra a ceea ce se întâmplă în sufletul utilizatorului (de ce simte nevoia să îi scrie lui ${pronoun} acum?).
-              - Riscul: Ce se întâmplă dacă ${pronoun} nu răspunde sau răspunde rece?
-              - O întrebare de reflexie profundă.
-              - Un pas practic imediat pentru a calma agitația.
+              BIBLIOTECA DE TEHNICI (Alege una diferită la fiecare interacțiune, în funcție de context):
+              1. ACT (Defuziune): Ajută-l să vadă gândul ca pe un nor care trece, nu ca pe o comandă de acțiune.
+              2. CBT (Reîncadrare): Provoacă-i blând credința că acest mesaj va schimba ceva în bine.
+              3. DBT (TIPP): Dacă e foarte agitat, recomandă schimbarea temperaturii corpului (apă rece pe față) sau respirație pătrată.
+              4. Somatic: Ancorarea în prezent prin simțuri (ce simte sub tălpi, ce aude acum).
+              5. Scrisoarea Nescrisă: Doar dacă e nevoie de descărcare masivă.
+
+              REGULI:
+              - Folosește EXCLUSIV genul ${gender === 'el' ? 'masculin' : 'feminin'} pentru fostul partener.
+              - Fii scurt (max 3 paragrafe) pentru a încuraja dialogul.
+              - Încheie mereu cu o întrebare deschisă care să îl invite să exploreze ce simte.
             ` 
           }]
         }]
@@ -48,10 +45,8 @@ export default async function handler(req, res) {
     const data = await response.json();
     if (data.candidates && data.candidates[0].content) {
       return res.status(200).json({ text: data.candidates[0].content.parts[0].text });
-    } else {
-      return res.status(200).json({ text: "Am avut o mică ezitare. Mai încearcă o dată, te rog." });
     }
   } catch (error) {
-    return res.status(200).json({ text: "Eroare server: " + error.message });
+    return res.status(200).json({ text: "Eroare server." });
   }
 }
