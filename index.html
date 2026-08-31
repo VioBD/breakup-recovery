@@ -30,17 +30,15 @@
 </head>
 <body class="font-sans">
 
-    <!-- SELECTOR LIMBĂ -->
-    <div class="fixed top-6 right-6 z-50 flex gap-2">
-        <button onclick="setLanguage('ro')" id="btn-ro" class="bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">RO</button>
-        <button onclick="setLanguage('en')" id="btn-en" class="bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg">EN</button>
-    </div>
-
     <!-- NAV -->
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
+    <nav class="sticky top-0 z-50 bg-brand-beige/95 backdrop-blur-sm p-4 md:p-6 flex justify-between items-center max-w-6xl mx-auto">
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 bg-brand-dark rounded-full"></div>
             <span class="font-bold tracking-tighter text-xl italic font-serif text-brand-dark">breakup recovery</span>
+        </div>
+        <div class="flex gap-2 shrink-0">
+            <button onclick="setLanguage('ro')" id="btn-ro" class="bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">RO</button>
+            <button onclick="setLanguage('en')" id="btn-en" class="bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg">EN</button>
         </div>
     </nav>
 
@@ -190,6 +188,14 @@
 
             <!-- RESULT & CHAT AREA -->
             <div id="resultArea" class="hidden space-y-8">
+                <div id="resumeBanner" class="hidden flex flex-col md:flex-row gap-3 items-center justify-between bg-brand-accent/30 px-6 py-4 rounded-2xl text-xs">
+                    <span class="lang-ro">Am reluat conversația ta anterioară.</span>
+                    <span class="lang-en lang-hidden">We picked up your previous conversation.</span>
+                    <button onclick="resetConversation()" class="underline font-bold shrink-0">
+                        <span class="lang-ro">Începe o conversație nouă</span>
+                        <span class="lang-en lang-hidden">Start a new conversation</span>
+                    </button>
+                </div>
                 <div class="bg-brand-dark text-brand-beige p-10 rounded-[3rem] shadow-2xl border-l-8 border-brand-accent">
                     <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block lang-ro">Perspectiva Psihoterapeutului</span>
                     <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block lang-en lang-hidden">Psychotherapist's Perspective</span>
@@ -270,11 +276,55 @@
     </footer>
 
     <script>
+        const STORAGE_KEY = 'breakupRecoveryState';
         let currentLang = 'ro';
         let selectedGender = "";
         let selectedObjective = "";
         let chatHistory = [];
         let messageCount = 0;
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    currentLang, selectedGender, selectedObjective, chatHistory, messageCount,
+                    started: !document.getElementById('resultArea').classList.contains('hidden')
+                }));
+            } catch (e) { /* storage unavailable (private mode, quota) - fail silently */ }
+        }
+
+        function resetConversation() {
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
+        }
+
+        function restoreState() {
+            let saved;
+            try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) { return; }
+            if (!saved || !saved.started || !saved.chatHistory || !saved.chatHistory.length) return;
+
+            currentLang = saved.currentLang || 'ro';
+            selectedGender = saved.selectedGender || '';
+            selectedObjective = saved.selectedObjective || '';
+            chatHistory = saved.chatHistory;
+            messageCount = saved.messageCount || 0;
+
+            setLanguage(currentLang);
+
+            document.getElementById('inputArea').classList.add('hidden');
+            document.getElementById('resultArea').classList.remove('hidden');
+            document.getElementById('resumeBanner').classList.remove('hidden');
+
+            const first = chatHistory[0];
+            if (first && first.role === 'assistant') {
+                document.getElementById('initialAnalysisText').innerText = first.content;
+            }
+            chatHistory.slice(1).forEach(turn => {
+                appendMessage(turn.content, turn.role === 'user' ? 'user' : 'ai');
+            });
+            if (messageCount >= 1) {
+                document.getElementById('decisionButtons').classList.remove('hidden');
+            }
+        }
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -335,6 +385,7 @@
                 document.getElementById('initialAnalysisText').innerText = data.text;
 
                 chatHistory.push({ role: 'assistant', content: data.text });
+                saveState();
                 document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
             } catch (e) {
                 alert(currentLang === 'ro'
@@ -380,6 +431,7 @@
                 if(messageCount >= 1) {
                     document.getElementById('decisionButtons').classList.remove('hidden');
                 }
+                saveState();
             } catch (e) {
                 const errMsg = currentLang === 'ro'
                     ? "Nu am putut trimite mesajul. Verifică conexiunea și încearcă din nou."
@@ -404,23 +456,25 @@
         }
 
         function finalDecision(type) {
+            let msg, res;
             if(type === 'no-send') {
-                const msg = currentLang === 'ro' ? "Am decis să NU trimit mesajul." : "I decided NOT to send.";
-                appendMessage(msg, 'user');
-                setTimeout(() => {
-                    const res = currentLang === 'ro' ? "O decizie curajoasă. Ai ales să îți protejezi liniștea. Cum te simți acum?" : "A brave decision. You chose to protect your peace. How do you feel now?";
-                    appendMessage(res, 'ai');
-                }, 1000);
+                msg = currentLang === 'ro' ? "Am decis să NU trimit mesajul." : "I decided NOT to send.";
+                res = currentLang === 'ro' ? "O decizie curajoasă. Ai ales să îți protejezi liniștea. Cum te simți acum?" : "A brave decision. You chose to protect your peace. How do you feel now?";
             } else {
-                const msg = currentLang === 'ro' ? "Vreau să-l trimit oricum." : "I want to send it anyway.";
-                appendMessage(msg, 'user');
-                setTimeout(() => {
-                    const res = currentLang === 'ro' ? "Înțeleg. Dacă simți că e necesar, fă-o cu blândețe față de tine. Vrei să te ajut să-l reformulezi?" : "I understand. If you feel it's necessary, do it with kindness toward yourself. Want me to help you rephrase it?";
-                    appendMessage(res, 'ai');
-                }, 1000);
+                msg = currentLang === 'ro' ? "Vreau să-l trimit oricum." : "I want to send it anyway.";
+                res = currentLang === 'ro' ? "Înțeleg. Dacă simți că e necesar, fă-o cu blândețe față de tine. Vrei să te ajut să-l reformulezi?" : "I understand. If you feel it's necessary, do it with kindness toward yourself. Want me to help you rephrase it?";
             }
+            appendMessage(msg, 'user');
+            chatHistory.push({ role: 'user', content: msg });
+            setTimeout(() => {
+                appendMessage(res, 'ai');
+                chatHistory.push({ role: 'assistant', content: res });
+                saveState();
+            }, 1000);
             document.getElementById('decisionButtons').classList.add('hidden');
         }
+
+        document.addEventListener('DOMContentLoaded', restoreState);
     </script>
 </body>
 </html>
