@@ -4,7 +4,11 @@ export default async function handler(req, res) {
   try {
     const { message, objective, gender, type, history, lang } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
-    const modelName = "gemini-1.5-flash"; 
+
+    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește din Vercel." });
+
+    // REVENIM LA MODELUL CARE A FUNCȚIONAT: gemini-3-flash-preview
+    const modelName = "gemini-3-flash-preview"; 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey.trim()}`;
 
     const pronoun = gender === 'el' ? 'el' : 'ea';
@@ -30,10 +34,19 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    const aiText = data.candidates[0].content.parts[0].text;
-    return res.status(200).json({ text: aiText });
+
+    if (data.error) {
+      return res.status(200).json({ text: "Eroare Google: " + data.error.message });
+    }
+
+    if (data.candidates && data.candidates[0].content) {
+      const aiText = data.candidates[0].content.parts[0].text;
+      return res.status(200).json({ text: aiText });
+    } else {
+      return res.status(200).json({ text: "AI-ul nu a putut genera un răspuns. Încearcă din nou." });
+    }
 
   } catch (error) {
-    return res.status(200).json({ text: "Eroare server." });
+    return res.status(200).json({ text: "Eroare server: " + error.message });
   }
 }
