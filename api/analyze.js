@@ -5,22 +5,21 @@ export default async function handler(req, res) {
     const { message, objective, gender, type, history, lang } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
-    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește." });
+    if (!apiKey) return res.status(200).json({ text: "Eroare: Cheia API lipsește din Vercel (Environment Variables)." });
 
-    // Folosim 1.5-flash pentru stabilitate maximă, chiar dacă e "ascuns" în AI Studio
-    const modelName = "gemini-1.5-flash"; 
+    // FOLOSIM EXACT MODELUL DIN SCREENSHOT-UL TĂU
+    const modelName = "gemini-3-flash-preview"; 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey.trim()}`;
 
     const pronoun = gender === 'el' ? 'el' : 'ea';
-
     let prompt = "";
+
     if (type === 'initial') {
-      prompt = `Ești un psihoterapeut expert. Utilizatorul vrea să-i scrie lui ${pronoun}: "${message}" cu scopul: "${objective}". 
-      Analizează draftul în 3 paragrafe calde: 1. Validare emoție. 2. Subtext (ce vrea de fapt). 3. Riscul trimiterii. 
-      NU folosi steluțe, titluri sau formatare markdown. Doar text simplu și uman. Limba: ${lang}.`;
+      prompt = `Ești un psihoterapeut expert în relații. Utilizatorul vrea să-i scrie lui ${pronoun}: "${message}" cu scopul: "${objective}". 
+      Analizează draftul în 3 paragrafe calde, umane, fără titluri sau steluțe. Limba: ${lang}.`;
     } else {
       prompt = `Ești un psihoterapeut într-un dialog de suport. Istoric: ${JSON.stringify(history)}. 
-      Utilizatorul spune: "${message}". Răspunde scurt (max 4 rânduri), empatic, fără steluțe sau markdown. Limba: ${lang}.`;
+      Utilizatorul spune: "${message}". Răspunde scurt, empatic, fără steluțe. Limba: ${lang}.`;
     }
 
     const response = await fetch(url, {
@@ -30,12 +29,19 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    if (data.error) return res.status(200).json({ text: "Suntem foarte solicitați. Te rugăm să aștepți 30 de secunde." });
 
-    const aiText = data.candidates[0].content.parts[0].text;
-    return res.status(200).json({ text: aiText });
+    // DACĂ GOOGLE DĂ EROARE, O TRIMITEM DIRECT LA UTILIZATOR SĂ O VEDEM
+    if (data.error) {
+      return res.status(200).json({ text: "Eroare de la Google: " + data.error.message });
+    }
+
+    if (data.candidates && data.candidates[0].content) {
+      return res.status(200).json({ text: data.candidates[0].content.parts[0].text });
+    } else {
+      return res.status(200).json({ text: "Google a trimis un răspuns gol. Detalii: " + JSON.stringify(data) });
+    }
 
   } catch (error) {
-    return res.status(200).json({ text: "Eroare server." });
+    return res.status(200).json({ text: "Eroare Server Vercel: " + error.message });
   }
 }
