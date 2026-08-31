@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breakup Recovery | Your space between impulse and decision</title>
+    <title>Breakup Recovery | Spațiul tău de claritate</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -20,7 +20,8 @@
         body { background-color: #F5F0E6; color: #4A1523; scroll-behavior: smooth; }
         .selected-option { border: 2px solid #4A1523 !important; background-color: #EBD9C1 !important; }
         .lang-hidden { display: none !important; }
-        .step-number { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; opacity: 0.3; }
+        .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
     </style>
 </head>
 <body class="font-sans">
@@ -40,196 +41,82 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="max-w-6xl mx-auto px-6 py-16 md:py-24 text-center">
+    <header class="max-w-6xl mx-auto px-6 py-16 md:py-24 text-center border-b border-brand-dark/5">
         <div class="lang-ro">
-            <span class="uppercase tracking-[0.3em] text-[10px] font-bold opacity-50 block">Când despărțirea încă doare</span>
-            <h1 class="text-6xl md:text-8xl font-serif italic mt-6 mb-8 leading-tight">Oprește-te.<br>Înainte să-i scrii.</h1>
-            <p class="max-w-2xl mx-auto text-xl italic font-serif opacity-80 leading-relaxed">"Nu vreau să mi se explice de ce nu ar trebui să-mi fie dor. Vreau să-mi pun dorul în cuvinte înainte să decid ce fac."</p>
+            <span class="uppercase tracking-[0.3em] text-[10px] font-bold opacity-50 block">Oprește-te un moment</span>
+            <h1 class="text-5xl md:text-7xl font-serif italic mt-6 mb-8 leading-tight">Nu apăsa pe "Trimite" încă.</h1>
+            <p class="max-w-2xl mx-auto text-xl italic font-serif opacity-80">Pune-ți dorul sau furia în cuvinte aici și primește un moment de claritate înainte de a decide ce faci mai departe.</p>
         </div>
         <div class="lang-en lang-hidden">
-            <span class="uppercase tracking-[0.3em] text-[10px] font-bold opacity-50 block">When the breakup still hurts</span>
-            <h1 class="text-6xl md:text-8xl font-serif italic mt-6 mb-8 leading-tight">Stop.<br>Before you text.</h1>
-            <p class="max-w-2xl mx-auto text-xl italic font-serif opacity-80 leading-relaxed">"I don't want to be told why I shouldn't miss them. I want to put my longing into words before I decide what to do."</p>
+            <span class="uppercase tracking-[0.3em] text-[10px] font-bold opacity-50 block">Stop for a moment</span>
+            <h1 class="text-5xl md:text-7xl font-serif italic mt-6 mb-8 leading-tight">Don't hit "Send" just yet.</h1>
+            <p class="max-w-2xl mx-auto text-xl italic font-serif opacity-80">Put your longing or anger into words here and get a moment of clarity before you decide what to do next.</p>
         </div>
     </header>
 
-    <!-- PROCESUL (Slide 5) -->
-    <section class="bg-brand-dark text-brand-beige py-24 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="lang-ro text-3xl font-serif italic mb-16 text-center">Un proces simplu pentru când nu știi ce să faci.</h2>
-            <h2 class="lang-en lang-hidden text-3xl font-serif italic mb-16 text-center">A simple process for when you don't know what to do.</h2>
+    <!-- DEMO SECTION -->
+    <section id="demo" class="max-w-4xl mx-auto px-6 py-16">
+        <div class="bg-white/40 p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-brand-dark/5 space-y-10">
             
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="space-y-4">
-                    <span class="step-number text-brand-accent">01</span>
-                    <div class="lang-ro">
-                        <h3 class="text-xl font-bold italic underline">Spune ce s-a întâmplat</h3>
-                        <p class="opacity-70 text-sm leading-relaxed">Poți scrie câteva cuvinte sau tot ce ai pe suflet. Nu te grăbește nimeni, nu te judecă nimeni. Te ajută să găsești formularea perfectă pentru tine.</p>
-                    </div>
-                    <div class="lang-en lang-hidden">
-                        <h3 class="text-xl font-bold italic underline">Tell us what happened</h3>
-                        <p class="opacity-70 text-sm leading-relaxed">Write a few words or everything on your mind. No one rushes you, no one judges you. It helps you find the perfect words.</p>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <span class="step-number text-brand-accent">02</span>
-                    <h3 class="lang-ro text-xl font-bold italic underline">Înțelege mai clar situația</h3>
-                    <h3 class="lang-en lang-hidden text-xl font-bold italic underline">Understand the situation</h3>
-                    <p class="lang-ro opacity-70 text-sm leading-relaxed">Primești o întrebare relevantă și un pas practic. Nu primești un diagnostic și nu ți se spune ce ar trebui să simți.</p>
-                    <p class="lang-en lang-hidden opacity-70 text-sm leading-relaxed">Receive a relevant question and a practical step. No diagnosis, no being told how to feel.</p>
-                </div>
-                <div class="space-y-4">
-                    <span class="step-number text-brand-accent">03</span>
-                    <h3 class="lang-ro text-xl font-bold italic underline">Alege ce faci mai departe</h3>
-                    <h3 class="lang-en lang-hidden text-xl font-bold italic underline">Choose what to do next</h3>
-                    <p class="lang-ro opacity-70 text-sm leading-relaxed">Poți păstra mesajul ca ciornă, îl poți trimite, poți suna un prieten sau poți reveni mai târziu. Decizia rămâne a ta.</p>
-                    <p class="lang-en lang-hidden opacity-70 text-sm leading-relaxed">Keep the message as a draft, send it, call a friend, or come back later. The decision is yours.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MOMENTE (Slide 4) -->
-    <section class="max-w-6xl mx-auto px-6 py-24">
-        <div class="grid md:grid-cols-2 gap-16">
             <div>
-                <h2 class="lang-ro text-5xl font-serif italic mb-12 leading-tight">Când nu știi ce să faci mai departe.</h2>
-                <h2 class="lang-en lang-hidden text-5xl font-serif italic mb-12 leading-tight">When you don't know what to do next.</h2>
-                
-                <div class="space-y-10">
-                    <div class="lang-ro">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">01. Când te gândești să-i scrii</h4>
-                        <p class="opacity-80 leading-relaxed">Scrii aici ce ai vrea să-i spui. Aplicația te ajută să înțelegi ce urmărești prin acel mesaj și să alegi dacă, când și cum vrei să acționezi.</p>
-                    </div>
-                    <div class="lang-en lang-hidden">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">01. When you're thinking of texting</h4>
-                        <p class="opacity-80 leading-relaxed">Write what you'd like to say. The app helps you understand your goal and choose if, when, and how to act.</p>
-                    </div>
-
-                    <div class="lang-ro">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">02. Când seara aduce înapoi toate gândurile</h4>
-                        <p class="opacity-80 leading-relaxed">Pui în cuvinte ce se întâmplă și primești un răspuns legat de situația ta — nu o listă de sfaturi despre cum ar trebui să te simți.</p>
-                    </div>
-                    <div class="lang-en lang-hidden">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">02. When the evening brings back all the thoughts</h4>
-                        <p class="opacity-80 leading-relaxed">Put what's happening into words and get a response tailored to your situation — not a list of advice on how to feel.</p>
-                    </div>
-
-                    <div class="lang-ro">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">03. Când cei din jur cred că ai trecut deja peste</h4>
-                        <p class="opacity-80 leading-relaxed">Poți vorbi despre lucruri contradictorii: îți poate fi dor și, în același timp, poți ști că relația nu mai putea continua.</p>
-                    </div>
-                    <div class="lang-en lang-hidden">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">03. When others think you should be over it</h4>
-                        <p class="opacity-80 leading-relaxed">You can talk about contradictory things: you can miss them and, at the same time, know the relationship couldn't continue.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center justify-center">
-                <div class="bg-brand-accent/20 p-12 rounded-[2.5rem] italic text-3xl font-serif leading-snug border border-brand-dark/5">
-                    <span class="lang-ro">"Nu vreau să mi se explice de ce nu ar trebui să-mi fie dor. Vreau să-mi pun dorul în cuvinte înainte să decid ce fac."</span>
-                    <span class="lang-en lang-hidden">"I don't want to be told why I shouldn't miss them. I want to put my longing into words before I decide what to do."</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TRUST & LIMITS (Slide 6) -->
-    <section class="max-w-6xl mx-auto px-6 py-20 border-y border-brand-dark/10">
-        <div class="text-center mb-16">
-            <h2 class="lang-ro text-5xl font-serif italic">Îți respectă povestea.</h2>
-            <h2 class="lang-en lang-hidden text-5xl font-serif italic">Respecting your story.</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8 text-sm">
-            <div class="p-8 bg-white/50 rounded-2xl">
-                <h4 class="lang-ro font-bold uppercase tracking-widest mb-4 text-[11px]">Nu trebuie să publici nimic</h4>
-                <h4 class="lang-en lang-hidden font-bold uppercase tracking-widest mb-4 text-[11px]">No need to publish anything</h4>
-                <p class="lang-ro opacity-70">Nu ai profil public, nu primești comentarii și nu trebuie să demonstrezi nimănui că te simți mai bine.</p>
-                <p class="lang-en lang-hidden opacity-70">No public profile, no comments, and no need to prove to anyone that you're feeling better.</p>
-            </div>
-            <div class="p-8 bg-white/50 rounded-2xl border-2 border-brand-dark/5">
-                <h4 class="lang-ro font-bold uppercase tracking-widest mb-4 text-[11px] text-red-900">Nu înlocuiește un specialist</h4>
-                <h4 class="lang-en lang-hidden font-bold uppercase tracking-widest mb-4 text-[11px] text-red-900">Not a replacement for a specialist</h4>
-                <p class="lang-ro opacity-70">Aplicația te ajută să-ți pui în ordine ce simți și să alegi un pas următor. Nu poate înlocui ajutorul unui specialist.</p>
-                <p class="lang-en lang-hidden opacity-70">The app helps organize your feelings and choose a next step. It cannot replace professional help.</p>
-            </div>
-            <div class="p-8 bg-white/50 rounded-2xl">
-                <h4 class="lang-ro font-bold uppercase tracking-widest mb-4 text-[11px]">Fără soluții miraculoase</h4>
-                <h4 class="lang-en lang-hidden font-bold uppercase tracking-widest mb-4 text-[11px]">No miracle solutions</h4>
-                <p class="lang-ro opacity-70">Scopul este un moment de claritate înainte de a acționa impulsiv. Nu promitem vindecări instantanee.</p>
-                <p class="lang-en lang-hidden opacity-70">The goal is a moment of clarity before acting impulsively. We don't promise instant cures.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- DEMO SECTION (Slide 3) -->
-    <section id="demo" class="max-w-4xl mx-auto px-6 py-24">
-        <div class="bg-white/40 p-10 md:p-16 rounded-[3rem] shadow-sm border border-brand-dark/5 space-y-10">
-            <h2 class="lang-ro text-4xl md:text-5xl font-serif italic text-center leading-tight">Înainte să trimiți mesajul,<br>ia-ți câteva minute.</h2>
-            <h2 class="lang-en lang-hidden text-4xl md:text-5xl font-serif italic text-center leading-tight">Before you send that text,<br>take a few minutes.</h2>
-
-            <div>
-                <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest">1. Ce ai vrea să spui?</label>
+                <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest">1. Ce ai vrea să-i scrii?</label>
                 <label class="lang-en lang-hidden block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest">1. What would you like to say?</label>
-                <textarea id="userMessage" class="w-full h-32 bg-brand-beige/50 border-none rounded-2xl p-6 text-lg outline-none focus:ring-1 focus:ring-brand-dark" placeholder="..."></textarea>
+                <textarea id="userMessage" class="w-full h-40 bg-brand-beige/50 border-none rounded-2xl p-6 text-lg outline-none focus:ring-1 focus:ring-brand-dark" placeholder="..."></textarea>
             </div>
 
             <div>
                 <label class="lang-ro block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest">2. Ce speri să obții?</label>
                 <label class="lang-en lang-hidden block text-[10px] font-bold uppercase mb-4 opacity-50 tracking-widest">2. What do you hope to achieve?</label>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <button onclick="selectObj(this, 'Claritate', 'Clarity')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
-                        <span class="lang-ro block font-serif italic text-xl underline">Un răspuns clar</span>
-                        <span class="lang-en lang-hidden block font-serif italic text-xl underline">Clear answer</span>
-                        <span class="lang-ro text-[10px] opacity-60">Unde ne aflăm?</span>
-                        <span class="lang-en lang-hidden text-[10px] opacity-60">Where do we stand?</span>
+                    <button onclick="selectObj(this, 'Claritate', 'Clarity')" class="opt-btn p-5 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
+                        <span class="lang-ro block font-serif italic text-lg">Un răspuns clar</span>
+                        <span class="lang-en lang-hidden block font-serif italic text-lg">Clear answer</span>
                     </button>
-                    <button onclick="selectObj(this, 'Apropiere', 'Closer')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
-                        <span class="lang-ro block font-serif italic text-xl underline">Apropiere</span>
-                        <span class="lang-en lang-hidden block font-serif italic text-xl underline">Closer</span>
-                        <span class="lang-ro text-[10px] opacity-60">Vreau reluarea legăturii.</span>
-                        <span class="lang-en lang-hidden text-[10px] opacity-60">I want to reconnect.</span>
+                    <button onclick="selectObj(this, 'Apropiere', 'Closer')" class="opt-btn p-5 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
+                        <span class="lang-ro block font-serif italic text-lg">Apropiere</span>
+                        <span class="lang-en lang-hidden block font-serif italic text-lg">Reconnection</span>
                     </button>
-                    <button onclick="selectObj(this, 'Descărcare', 'Venting')" class="opt-btn p-6 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
-                        <span class="lang-ro block font-serif italic text-xl underline">Descărcare</span>
-                        <span class="lang-en lang-hidden block font-serif italic text-xl underline">Venting</span>
-                        <span class="lang-ro text-[10px] opacity-60">Să spun ce am pe suflet.</span>
-                        <span class="lang-en lang-hidden text-[10px] opacity-60">Say what's on my mind.</span>
+                    <button onclick="selectObj(this, 'Descărcare', 'Venting')" class="opt-btn p-5 border border-brand-dark/10 rounded-2xl text-left bg-white transition hover:border-brand-dark">
+                        <span class="lang-ro block font-serif italic text-lg">Descărcare</span>
+                        <span class="lang-en lang-hidden block font-serif italic text-lg">Venting</span>
                     </button>
                 </div>
             </div>
 
-            <button onclick="runRealAI()" id="btnRun" class="w-full bg-brand-dark text-white py-6 rounded-full font-bold text-xl shadow-2xl">
+            <button onclick="runRealAI()" id="btnRun" class="w-full bg-brand-dark text-white py-6 rounded-full font-bold text-xl shadow-xl transition-all active:scale-95">
                 <span class="lang-ro">Analizează mesajul →</span>
                 <span class="lang-en lang-hidden">Analyze message →</span>
             </button>
 
-            <div id="aiRes" class="hidden mt-8 p-10 bg-brand-dark text-brand-beige rounded-[2rem]">
-                <p id="aiText" class="text-lg leading-relaxed italic opacity-90"></p>
+            <!-- RĂSPUNS AI -->
+            <div id="aiRes" class="hidden mt-8 p-8 md:p-12 bg-white rounded-[2rem] border border-brand-dark/5 shadow-inner">
+                <div class="flex items-center gap-2 mb-6 opacity-30">
+                    <div class="w-2 h-2 bg-brand-dark rounded-full"></div>
+                    <span class="text-[10px] uppercase tracking-[0.2em] font-bold lang-ro">Perspectiva AI</span>
+                    <span class="text-[10px] uppercase tracking-[0.2em] font-bold lang-en lang-hidden">AI Perspective</span>
+                </div>
+                <div id="aiText" class="text-lg leading-relaxed font-serif whitespace-pre-wrap italic text-brand-dark/90"></div>
             </div>
         </div>
     </section>
 
     <!-- WAITLIST -->
-    <section id="waitlist" class="bg-brand-dark text-brand-beige py-32 px-6 text-center">
-        <div class="max-w-xl mx-auto">
-            <h2 class="lang-ro text-4xl font-serif italic mb-6 leading-tight">Vrei să știi când lansăm?</h2>
-            <h2 class="lang-en lang-hidden text-4xl font-serif italic mb-6 leading-tight">Want to know when we launch?</h2>
-            
-            <!-- ÎNLOCUIEȘTE LINKUL DE MAI JOS CU LINKUL TĂU FORMSPREE -->
-            <form action="https://formspree.io/f/xzebzpll" method="POST" class="space-y-4">
-                <input type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none">
-                <button type="submit" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors">
-                    <span class="lang-ro uppercase tracking-widest">Înscrie-mă</span>
-                    <span class="lang-en lang-hidden uppercase tracking-widest">Sign me up</span>
-                </button>
-            </form>
-            <p class="lang-ro text-[9px] mt-8 opacity-40 uppercase tracking-[0.2em] font-bold italic">Respectăm GDPR. Fără spam.</p>
-            <p class="lang-en lang-hidden text-[9px] mt-8 opacity-40 uppercase tracking-[0.2em] font-bold italic">Respecting GDPR. No spam.</p>
-        </div>
+    <section id="waitlist" class="max-w-xl mx-auto px-6 py-24 text-center">
+        <h2 class="lang-ro text-3xl font-serif italic mb-6">Ți-a fost de ajutor?</h2>
+        <h2 class="lang-en lang-hidden text-3xl font-serif italic mb-6">Was this helpful?</h2>
+        <p class="lang-ro opacity-60 mb-8 text-sm leading-relaxed">Lansăm în curând o versiune completă cu istoric, exerciții de ghidare și suport pentru momente grele. Lasă-ți emailul pentru acces prioritar.</p>
+        <p class="lang-en lang-hidden opacity-60 mb-8 text-sm leading-relaxed">Launching soon with history, guided exercises, and support for tough moments. Leave your email for early access.</p>
+        
+        <form action="https://formspree.io/f/xzebzpll" method="POST" class="space-y-3">
+            <input type="email" name="email" required placeholder="email@tău.com" class="w-full p-5 rounded-full bg-white border border-brand-dark/10 outline-none focus:border-brand-dark transition-colors">
+            <button type="submit" class="w-full bg-brand-dark text-white py-5 rounded-full font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+                <span class="lang-ro">Anunță-mă la lansare</span>
+                <span class="lang-en lang-hidden">Notify me on launch</span>
+            </button>
+        </form>
     </section>
 
-    <footer class="p-12 text-center text-[10px] uppercase tracking-[0.3em] opacity-30 font-bold italic">
+    <footer class="p-12 text-center text-[9px] uppercase tracking-[0.3em] opacity-30 font-bold italic">
         &copy; 2026 Breakup Recovery
     </footer>
 
@@ -274,8 +161,11 @@
                 return; 
             }
 
-            b.innerText = currentLang === 'ro' ? "Se procesează..." : "Processing...";
+            // Stare de încărcare
+            const originalText = b.innerHTML;
+            b.innerHTML = currentLang === 'ro' ? "Analizăm situația..." : "Analyzing...";
             b.disabled = true;
+            b.classList.add('loading-pulse');
 
             try {
                 const response = await fetch('/api/analyze', {
@@ -291,12 +181,13 @@
                 const data = await response.json();
                 r.classList.remove('hidden');
                 t.innerText = data.text;
-            } catch (e) {
-                alert("Eroare la conectarea cu AI-ul.");
-            } finally {
-                b.innerText = currentLang === 'ro' ? "Analizează mesajul →" : "Analyze message →";
-                b.disabled = false;
                 r.scrollIntoView({ behavior: 'smooth' });
+            } catch (e) {
+                alert("Eroare tehnică. Te rugăm să încerci din nou.");
+            } finally {
+                b.innerHTML = originalText;
+                b.disabled = false;
+                b.classList.remove('loading-pulse');
             }
         }
     </script>
