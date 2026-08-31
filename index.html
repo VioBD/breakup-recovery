@@ -23,8 +23,7 @@
         .step-number { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; opacity: 0.3; }
         .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-        /* Stiluri pentru Chat */
-        #chatWindow::-webkit-scrollbar { width: 4px; }
+        #chatWindow::-webkit-scrollbar { width: 6px; }
         #chatWindow::-webkit-scrollbar-thumb { background: #4A152322; border-radius: 10px; }
     </style>
 </head>
@@ -68,18 +67,34 @@
                     <span class="step-number text-brand-accent">01</span>
                     <div class="lang-ro">
                         <h3 class="text-xl font-bold italic underline">Spune ce s-a întâmplat</h3>
-                        <p class="opacity-70 text-sm leading-relaxed">Poți scrie câteva cuvinte sau tot ce ai pe suflet. Nu te grăbește nimeni, nu te judecă nimeni.</p>
+                        <p class="opacity-70 text-sm leading-relaxed">Poți scrie câteva cuvinte sau tot ce ai pe suflet. Nu te grăbește nimeni.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h3 class="text-xl font-bold italic underline">Tell us what happened</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Write a few words or everything on your mind. No one rushes you.</p>
                     </div>
                 </div>
                 <div class="space-y-4">
                     <span class="step-number text-brand-accent">02</span>
-                    <h3 class="lang-ro text-xl font-bold italic underline">Înțelege mai clar situația</h3>
-                    <p class="lang-ro opacity-70 text-sm leading-relaxed">Primești o întrebare relevantă și un pas practic. Nu primești un diagnostic.</p>
+                    <div class="lang-ro">
+                        <h3 class="text-xl font-bold italic underline">Înțelege mai clar situația</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Primești o întrebare relevantă și un pas practic bazat pe psihoterapie.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h3 class="text-xl font-bold italic underline">Understand the situation</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Receive a relevant question and a practical step based on psychotherapy.</p>
+                    </div>
                 </div>
                 <div class="space-y-4">
                     <span class="step-number text-brand-accent">03</span>
-                    <h3 class="lang-ro text-xl font-bold italic underline">Alege ce faci mai departe</h3>
-                    <p class="lang-ro opacity-70 text-sm leading-relaxed">Decizia rămâne a ta: trimiți mesajul sau alegi liniștea.</p>
+                    <div class="lang-ro">
+                        <h3 class="text-xl font-bold italic underline">Alege ce faci mai departe</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">Decizia rămâne a ta: trimiți mesajul sau alegi liniștea.</p>
+                    </div>
+                    <div class="lang-en lang-hidden">
+                        <h3 class="text-xl font-bold italic underline">Choose what to do next</h3>
+                        <p class="opacity-70 text-sm leading-relaxed">The decision is yours: send the text or choose peace.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,83 +105,64 @@
         <div class="grid md:grid-cols-2 gap-16">
             <div>
                 <h2 class="lang-ro text-5xl font-serif italic mb-12 leading-tight">Când nu știi ce să faci mai departe.</h2>
+                <h2 class="lang-en lang-hidden text-5xl font-serif italic mb-12 leading-tight">When you don't know what to do next.</h2>
                 <div class="space-y-10">
                     <div class="lang-ro">
                         <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">01. Când te gândești să-i scrii</h4>
-                        <p class="opacity-80 leading-relaxed">Scrii aici ce ai vrea să-i spui. Aplicația te ajută să înțelegi ce urmărești prin acel mesaj.</p>
+                        <p class="opacity-80 leading-relaxed">Aplicația te ajută să înțelegi ce urmărești prin acel mesaj.</p>
                     </div>
-                    <div class="lang-ro">
-                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">02. Când seara aduce înapoi toate gândurile</h4>
-                        <p class="opacity-80 leading-relaxed">Pui în cuvinte ce se întâmplă și primești un răspuns legat de situația ta.</p>
+                    <div class="lang-en lang-hidden">
+                        <h4 class="font-bold text-xs uppercase tracking-widest mb-2 opacity-50">01. When you're thinking of texting</h4>
+                        <p class="opacity-80 leading-relaxed">The app helps you understand your goal behind that message.</p>
                     </div>
                 </div>
             </div>
             <div class="flex items-center justify-center">
                 <div class="bg-brand-accent/20 p-12 rounded-[2.5rem] italic text-3xl font-serif leading-snug border border-brand-dark/5">
-                    <span class="lang-ro">"Nu vreau să mi se explice de ce nu ar trebui să-mi fie dor. Vreau să-mi pun dorul în cuvinte înainte să decid ce fac."</span>
+                    <span class="lang-ro">"Vreau să-mi pun dorul în cuvinte înainte să decid ce fac."</span>
+                    <span class="lang-en lang-hidden">"I want to put my longing into words before I decide what to do."</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TRUST & LIMITS -->
-    <section class="max-w-6xl mx-auto px-6 py-20 border-y border-brand-dark/10">
-        <div class="text-center mb-16">
-            <h2 class="lang-ro text-5xl font-serif italic">Îți respectă povestea.</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8 text-sm">
-            <div class="p-8 bg-white/50 rounded-2xl">
-                <h4 class="font-bold uppercase tracking-widest mb-4 text-[11px]">Nu trebuie să publici nimic</h4>
-                <p class="opacity-70">Nu ai profil public, nu primești comentarii și nu trebuie să demonstrezi nimic nimănui.</p>
-            </div>
-            <div class="p-8 bg-white/50 rounded-2xl border-2 border-brand-dark/5">
-                <h4 class="font-bold uppercase tracking-widest mb-4 text-[11px] text-red-900">Nu înlocuiește un specialist</h4>
-                <p class="opacity-70">Aplicația te ajută să-ți pui în ordine ce simți. Nu poate înlocui ajutorul unui specialist.</p>
-            </div>
-            <div class="p-8 bg-white/50 rounded-2xl">
-                <h4 class="font-bold uppercase tracking-widest mb-4 text-[11px]">Fără soluții miraculoase</h4>
-                <p class="opacity-70">Scopul este un moment de claritate înainte de a acționa impulsiv.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- DEMO SECTION (Aici am transformat în Chat, păstrând designul) -->
-    <section id="demo" class="max-w-4xl mx-auto px-6 py-24">
-        <div class="bg-white/40 p-8 md:p-12 rounded-[3rem] shadow-sm border border-brand-dark/5 flex flex-col h-[700px]">
+    <!-- DEMO SECTION (CHAT WIDE) -->
+    <section id="demo" class="max-w-5xl mx-auto px-6 py-24">
+        <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-brand-dark/5 flex flex-col h-[800px]">
             
-            <h2 class="text-3xl font-serif italic text-center mb-8">Spațiul tău de dialog</h2>
+            <h2 class="lang-ro text-3xl font-serif italic text-center mb-8">Spațiul tău de dialog</h2>
+            <h2 class="lang-en lang-hidden text-3xl font-serif italic text-center mb-8">Your space for dialogue</h2>
 
             <!-- FEREASTRA DE CHAT -->
-            <div id="chatWindow" class="flex-1 overflow-y-auto space-y-6 mb-8 p-4">
+            <div id="chatWindow" class="flex-1 overflow-y-auto space-y-6 mb-8 p-6 bg-brand-beige/20 rounded-3xl">
                 <div class="bg-brand-dark text-brand-beige p-6 rounded-2xl rounded-tl-none max-w-[90%] italic shadow-lg">
-                    Bună. Sunt aici să te ascult fără să te judec. Înainte să începem, spune-mi: despre cine este vorba (el/ea) și ce ai vrea să-i spui?
+                    <span class="lang-ro">Bună. Sunt aici să te ascult. Înainte să începem, spune-mi: despre cine este vorba (el/ea) și ce ai vrea să-i spui?</span>
+                    <span class="lang-en lang-hidden">Hello. I'm here to listen. Before we start: who is this about (him/her) and what would you like to say?</span>
                 </div>
             </div>
 
             <!-- CONTROALE INPUT -->
-            <div class="space-y-6 bg-white/60 p-6 rounded-[2rem] border border-brand-dark/5">
+            <div class="space-y-6 bg-brand-beige/40 p-6 rounded-[2rem] border border-brand-dark/5">
                 
-                <!-- Pasul 0: Genul -->
-                <div class="flex items-center gap-4">
-                    <span class="text-[10px] font-bold uppercase opacity-40 tracking-widest">Cui îi scrii?</span>
-                    <button onclick="setGender('el')" id="gen-el" class="gen-btn px-4 py-1 border border-brand-dark/10 rounded-full bg-white text-xs italic transition-all">El</button>
-                    <button onclick="setGender('ea')" id="gen-ea" class="gen-btn px-4 py-1 border border-brand-dark/10 rounded-full bg-white text-xs italic transition-all">Ea</button>
+                <div class="flex flex-wrap items-center gap-4">
+                    <span class="lang-ro text-[10px] font-bold uppercase opacity-40 tracking-widest">Cui îi scrii?</span>
+                    <span class="lang-en lang-hidden text-[10px] font-bold uppercase opacity-40 tracking-widest">Who are you writing to?</span>
+                    <button onclick="setGender('el')" id="gen-el" class="gen-btn px-6 py-2 border border-brand-dark/10 rounded-full bg-white text-xs italic transition-all">El / Him</button>
+                    <button onclick="setGender('ea')" id="gen-ea" class="gen-btn px-6 py-2 border border-brand-dark/10 rounded-full bg-white text-xs italic transition-all">Ea / Her</button>
+                    
+                    <div class="h-4 w-px bg-brand-dark/10 mx-2"></div>
+
+                    <span class="lang-ro text-[10px] font-bold uppercase opacity-40 tracking-widest">Scop:</span>
+                    <span class="lang-en lang-hidden text-[10px] font-bold uppercase opacity-40 tracking-widest">Goal:</span>
+                    <button onclick="selectObj(this, 'Claritate', 'Clarity')" class="opt-btn px-4 py-2 border border-brand-dark/10 rounded-full bg-white text-[10px] uppercase tracking-tighter">Claritate / Clarity</button>
+                    <button onclick="selectObj(this, 'Apropiere', 'Connection')" class="opt-btn px-4 py-2 border border-brand-dark/10 rounded-full bg-white text-[10px] uppercase tracking-tighter">Apropiere / Connection</button>
                 </div>
 
-                <!-- Pasul 1: Mesajul -->
-                <div class="flex gap-3">
-                    <textarea id="userMessage" class="flex-1 h-24 bg-brand-beige/50 border-none rounded-2xl p-4 text-sm outline-none focus:ring-1 focus:ring-brand-dark resize-none" placeholder="Scrie aici mesajul sau ce simți..."></textarea>
-                    <button onclick="runRealAI()" id="btnRun" class="bg-brand-dark text-white px-8 rounded-2xl font-bold hover:bg-black transition-all shadow-lg active:scale-95">
+                <div class="flex gap-4">
+                    <textarea id="userMessage" class="flex-1 h-24 bg-white border-none rounded-2xl p-4 text-base outline-none focus:ring-1 focus:ring-brand-dark resize-none shadow-sm" placeholder="..."></textarea>
+                    <button onclick="runRealAI()" id="btnRun" class="bg-brand-dark text-white px-10 rounded-2xl font-bold hover:bg-black transition-all shadow-lg active:scale-95">
                         →
                     </button>
-                </div>
-
-                <!-- Pasul 2: Obiectivul (Mici butoane sub) -->
-                <div class="flex gap-2 overflow-x-auto pb-2">
-                    <span class="text-[10px] font-bold uppercase opacity-40 tracking-widest self-center mr-2">Scop:</span>
-                    <button onclick="selectObj(this, 'Claritate')" class="opt-btn px-4 py-1 border border-brand-dark/10 rounded-full bg-white text-[10px] whitespace-nowrap">Claritate</button>
-                    <button onclick="selectObj(this, 'Apropiere')" class="opt-btn px-4 py-1 border border-brand-dark/10 rounded-full bg-white text-[10px] whitespace-nowrap">Apropiere</button>
-                    <button onclick="selectObj(this, 'Descărcare')" class="opt-btn px-4 py-1 border border-brand-dark/10 rounded-full bg-white text-[10px] whitespace-nowrap">Descărcare</button>
                 </div>
             </div>
         </div>
@@ -175,11 +171,13 @@
     <!-- WAITLIST -->
     <section id="waitlist" class="bg-brand-dark text-brand-beige py-32 px-6 text-center">
         <div class="max-w-xl mx-auto">
-            <h2 class="text-4xl font-serif italic mb-6 leading-tight">Vrei să știi când lansăm varianta completă?</h2>
+            <h2 class="lang-ro text-4xl font-serif italic mb-6 leading-tight">Vrei să știi când lansăm varianta PRO?</h2>
+            <h2 class="lang-en lang-hidden text-4xl font-serif italic mb-6 leading-tight">Want to know when we launch PRO?</h2>
             <form action="https://formspree.io/f/xzebzpll" method="POST" class="space-y-4">
                 <input type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none">
-                <button type="submit" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors">
-                    Înscrie-mă
+                <button type="submit" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors uppercase tracking-widest">
+                    <span class="lang-ro">Înscrie-mă</span>
+                    <span class="lang-en lang-hidden">Sign me up</span>
                 </button>
             </form>
         </div>
@@ -191,13 +189,26 @@
 
     <script>
         let currentLang = 'ro';
-        let selectedObjRO = "";
+        let selectedObj = "";
         let selectedGender = "";
         let chatHistory = [];
 
         function setLanguage(lang) {
-            // Logica de limbă rămâne, dar ne concentrăm pe RO acum
             currentLang = lang;
+            const btnRo = document.getElementById('btn-ro');
+            const btnEn = document.getElementById('btn-en');
+            
+            if(lang === 'ro') {
+                btnRo.className = "bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                btnEn.className = "bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                document.querySelectorAll('.lang-ro').forEach(el => el.classList.remove('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('lang-hidden'));
+            } else {
+                btnEn.className = "bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                btnRo.className = "bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                document.querySelectorAll('.lang-ro').forEach(el => el.classList.add('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('lang-hidden'));
+            }
         }
 
         function setGender(gen) {
@@ -206,8 +217,8 @@
             document.getElementById('gen-' + gen).classList.add('selected-option');
         }
 
-        function selectObj(btn, roVal) {
-            selectedObjRO = roVal;
+        function selectObj(btn, roVal, enVal) {
+            selectedObj = (currentLang === 'ro') ? roVal : enVal;
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected-option'));
             btn.classList.add('selected-option');
         }
@@ -216,9 +227,9 @@
             const chatWin = document.getElementById('chatWindow');
             const div = document.createElement('div');
             if(side === 'user') {
-                div.className = "bg-brand-accent/40 p-5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto text-sm shadow-sm border border-brand-dark/5";
+                div.className = "bg-brand-accent/40 p-6 rounded-2xl rounded-tr-none max-w-[85%] ml-auto text-sm shadow-sm border border-brand-dark/5";
             } else {
-                div.className = "bg-brand-dark text-brand-beige p-6 rounded-2xl rounded-tl-none max-w-[90%] text-sm italic whitespace-pre-wrap shadow-lg";
+                div.className = "bg-brand-dark text-brand-beige p-8 rounded-2xl rounded-tl-none max-w-[95%] text-base italic whitespace-pre-wrap shadow-xl leading-relaxed";
             }
             div.innerText = text;
             chatWin.appendChild(div);
@@ -229,8 +240,8 @@
             const m = document.getElementById('userMessage').value;
             const b = document.getElementById('btnRun');
 
-            if(!m || !selectedObjRO || !selectedGender) { 
-                alert("Te rugăm să alegi genul (el/ea), obiectivul și să scrii mesajul."); 
+            if(!m || !selectedObj || !selectedGender) { 
+                alert(currentLang === 'ro' ? "Te rugăm să alegi genul, obiectivul și să scrii mesajul." : "Please select gender, goal and write your message."); 
                 return; 
             }
 
@@ -245,8 +256,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
                         message: m, 
-                        objective: selectedObjRO,
-                        lang: 'ro',
+                        objective: selectedObj,
+                        lang: currentLang,
                         gender: selectedGender,
                         history: chatHistory
                     })
@@ -256,7 +267,7 @@
                 appendMessage(data.text, 'ai');
                 chatHistory.push({ role: 'user', content: m }, { role: 'assistant', content: data.text });
             } catch (e) {
-                appendMessage("Eroare la conectarea cu AI-ul. Încearcă din nou.", 'ai');
+                appendMessage(currentLang === 'ro' ? "Eroare de conexiune." : "Connection error.", 'ai');
             } finally {
                 b.disabled = false;
                 b.classList.remove('loading-pulse');
