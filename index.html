@@ -196,13 +196,13 @@
                         <span class="lang-en lang-hidden">Start a new conversation</span>
                     </button>
                 </div>
-                <div class="bg-brand-dark text-brand-beige p-10 rounded-[3rem] shadow-2xl border-l-8 border-brand-accent">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block lang-ro">Perspectiva Psihoterapeutului</span>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-6 block lang-en lang-hidden">Psychotherapist's Perspective</span>
-                    <div id="initialAnalysisText" class="text-xl italic leading-relaxed whitespace-pre-wrap opacity-95 font-serif"></div>
+                <div class="bg-brand-dark text-brand-beige p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] shadow-2xl border-l-8 border-brand-accent">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-ro">Perspectiva Psihoterapeutului</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-en lang-hidden">Psychotherapist's Perspective</span>
+                    <div id="initialAnalysisText" class="text-base md:text-xl italic leading-normal md:leading-relaxed whitespace-pre-wrap opacity-95 font-serif"></div>
                 </div>
 
-                <div id="chatWindow" class="h-[500px] overflow-y-auto p-8 bg-brand-beige/20 rounded-[3rem] space-y-6 border border-brand-dark/5 shadow-inner">
+                <div id="chatWindow" class="h-[400px] md:h-[500px] overflow-y-auto p-4 md:p-8 bg-brand-beige/20 rounded-[2rem] md:rounded-[3rem] space-y-4 md:space-y-6 border border-brand-dark/5 shadow-inner">
                     <!-- Mesaje -->
                 </div>
 
@@ -447,9 +447,9 @@
         function appendMessage(text, side) {
             const win = document.getElementById('chatWindow');
             const div = document.createElement('div');
-            div.className = side === 'user' 
-                ? "bg-brand-accent/30 p-6 rounded-[2rem] rounded-tr-none ml-auto max-w-[85%] text-base shadow-sm"
-                : "bg-brand-dark text-brand-beige p-8 rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-base italic whitespace-pre-wrap shadow-md leading-relaxed";
+            div.className = side === 'user'
+                ? "bg-brand-accent/30 p-4 md:p-6 rounded-2xl md:rounded-[2rem] rounded-tr-none ml-auto max-w-[85%] text-sm md:text-base shadow-sm"
+                : "bg-brand-dark text-brand-beige p-5 md:p-8 rounded-2xl md:rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-sm md:text-base italic whitespace-pre-wrap shadow-md leading-normal md:leading-relaxed";
             div.innerText = text;
             win.appendChild(div);
             win.scrollTop = win.scrollHeight;
