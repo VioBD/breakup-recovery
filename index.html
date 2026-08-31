@@ -21,7 +21,6 @@
         .selected-option { border: 2px solid #4A1523 !important; background-color: #EBD9C1 !important; }
         .lang-hidden { display: none !important; }
         .step-number { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; opacity: 0.3; }
-        /* Animație pentru buton când AI-ul gândește */
         .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
     </style>
@@ -56,7 +55,7 @@
         </div>
     </header>
 
-    <!-- PROCESUL -->
+    <!-- PROCESUL (Slide 5) -->
     <section class="bg-brand-dark text-brand-beige py-24 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="lang-ro text-3xl font-serif italic mb-16 text-center">Un proces simplu pentru când nu știi ce să faci.</h2>
@@ -92,7 +91,7 @@
         </div>
     </section>
 
-    <!-- MOMENTE -->
+    <!-- MOMENTE (Slide 4) -->
     <section class="max-w-6xl mx-auto px-6 py-24">
         <div class="grid md:grid-cols-2 gap-16">
             <div>
@@ -137,7 +136,7 @@
         </div>
     </section>
 
-    <!-- TRUST & LIMITS -->
+    <!-- TRUST & LIMITS (Slide 6) -->
     <section class="max-w-6xl mx-auto px-6 py-20 border-y border-brand-dark/10">
         <div class="text-center mb-16">
             <h2 class="lang-ro text-5xl font-serif italic">Îți respectă povestea.</h2>
@@ -165,7 +164,7 @@
         </div>
     </section>
 
-    <!-- DEMO SECTION -->
+    <!-- DEMO SECTION (Slide 3) -->
     <section id="demo" class="max-w-4xl mx-auto px-6 py-24">
         <div class="bg-white/40 p-10 md:p-16 rounded-[3rem] shadow-sm border border-brand-dark/5 space-y-10">
             <h2 class="lang-ro text-4xl md:text-5xl font-serif italic text-center leading-tight">Înainte să trimiți mesajul,<br>ia-ți câteva minute.</h2>
@@ -207,7 +206,6 @@
                 <span class="lang-en lang-hidden">Analyze message →</span>
             </button>
 
-            <!-- RĂSPUNS AI (Aici am adăugat whitespace-pre-wrap pentru paragrafe) -->
             <div id="aiRes" class="hidden mt-8 p-10 bg-brand-dark text-brand-beige rounded-[2rem]">
                 <p id="aiText" class="text-lg leading-relaxed italic opacity-90 whitespace-pre-wrap"></p>
             </div>
@@ -277,7 +275,6 @@
                 return; 
             }
 
-            // Îmbunătățire: Feedback vizual pe buton
             const originalText = b.innerHTML;
             b.innerHTML = currentLang === 'ro' ? "Analizăm situația..." : "Analyzing...";
             b.disabled = true;
