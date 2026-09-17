@@ -476,5 +476,11 @@
 
         document.addEventListener('DOMContentLoaded', restoreState);
     </script>
+
+    <!-- Vercel Web Analytics (no build step, loaded straight from the package's CDN build) -->
+    <script type="module">
+        import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1/dist/index.mjs';
+        inject();
+    </script>
 </body>
 </html>
