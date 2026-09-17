@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Breakup Recovery | Your space between impulse and decision</title>
+    <meta name="description" content="Înainte să-i scrii fostului/fostei, ia-ți câteva minute. Un spațiu privat, ghidat de AI, care te ajută să înțelegi ce vrei să transmiți înainte să decizi dacă mai trimiți mesajul.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://breakup-recovery.vercel.app/">
+    <meta property="og:title" content="Breakup Recovery | Oprește-te. Înainte să-i scrii.">
+    <meta property="og:description" content="Un spațiu privat, ghidat de AI, care te ajută să înțelegi ce vrei să transmiți fostului/fostei înainte să decizi dacă mai trimiți mesajul.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Breakup Recovery | Oprește-te. Înainte să-i scrii.">
+    <meta name="twitter:description" content="Un spațiu privat, ghidat de AI, care te ajută să înțelegi ce vrei să transmiți fostului/fostei înainte să decizi dacă mai trimiți mesajul.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -256,23 +264,44 @@
         </div>
     </section>
 
-    <!-- WAITLIST -->
+    <!-- ACCESS CTA -->
     <section id="waitlist" class="bg-brand-dark text-brand-beige py-32 px-6 text-center">
         <div class="max-w-xl mx-auto">
-            <h2 class="lang-ro text-4xl font-serif italic mb-6 leading-tight">Vrei să știi când lansăm varianta PRO?</h2>
-            <h2 class="lang-en lang-hidden text-4xl font-serif italic mb-6 leading-tight">Want to know when we launch PRO?</h2>
-            <form action="https://formspree.io/f/xzebzpll" method="POST" class="space-y-4">
-                <input type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none">
-                <button type="submit" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors uppercase tracking-widest">
-                    <span class="lang-ro">Înscrie-mă</span>
-                    <span class="lang-en lang-hidden">Sign me up</span>
+            <h2 class="lang-ro text-4xl font-serif italic mb-4 leading-tight">Obține acces gratuit 15 zile</h2>
+            <h2 class="lang-en lang-hidden text-4xl font-serif italic mb-4 leading-tight">Get 15 days of free access</h2>
+            <p class="lang-ro text-sm opacity-70 mb-8">Lasă-ți email-ul și primești acces gratuit la Breakup Recovery primele 15 zile de la lansare. Îți trimitem toate detaliile pe email.</p>
+            <p class="lang-en lang-hidden text-sm opacity-70 mb-8">Leave your email and get free access to Breakup Recovery for your first 15 days at launch. We'll send you all the details by email.</p>
+
+            <form id="accessForm" action="https://formspree.io/f/xzebzpll" method="POST" onsubmit="return handleAccessSubmit(event)" class="space-y-4 text-left">
+                <input id="accessEmail" type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none text-center">
+
+                <label class="flex items-start gap-3 text-xs opacity-80 px-2">
+                    <input id="accessConsent" type="checkbox" name="consent" required class="mt-1 shrink-0">
+                    <span class="lang-ro">Sunt de acord să fiu contactat/ă pe acest email despre accesul la aplicație. Vezi <a href="/privacy.html" target="_blank" class="underline">Politica de confidențialitate</a>.</span>
+                    <span class="lang-en lang-hidden">I agree to be contacted at this email about app access. See our <a href="/privacy.html" target="_blank" class="underline">Privacy Policy</a>.</span>
+                </label>
+
+                <button type="submit" id="accessSubmitBtn" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors uppercase tracking-widest">
+                    <span class="lang-ro">Obține acces</span>
+                    <span class="lang-en lang-hidden">Get access</span>
                 </button>
             </form>
+
+            <div id="accessSuccess" class="hidden bg-brand-beige/10 border border-brand-beige/30 rounded-2xl p-8">
+                <p class="lang-ro">Perfect — ai acces gratuit primele 15 zile. Îți trimitem detaliile pe email în curând.</p>
+                <p class="lang-en lang-hidden">Perfect — you have free access for your first 15 days. We'll send you the details by email soon.</p>
+            </div>
+
+            <div id="accessError" class="hidden text-xs text-red-300 mt-4">
+                <span class="lang-ro">N-am putut trimite formularul chiar acum. Încearcă din nou.</span>
+                <span class="lang-en lang-hidden">We couldn't send the form right now. Please try again.</span>
+            </div>
         </div>
     </section>
 
-    <footer class="p-12 text-center text-[10px] uppercase tracking-[0.3em] opacity-30 font-bold italic">
-        &copy; 2026 Breakup Recovery
+    <footer class="p-12 text-center text-[10px] uppercase tracking-[0.3em] opacity-30 font-bold italic space-x-4">
+        <span>&copy; 2026 Breakup Recovery</span>
+        <a href="/privacy.html" class="underline hover:opacity-100">Confidențialitate</a>
     </footer>
 
     <script>
@@ -472,6 +501,30 @@
                 saveState();
             }, 1000);
             document.getElementById('decisionButtons').classList.add('hidden');
+        }
+
+        async function handleAccessSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('accessForm');
+            const btn = document.getElementById('accessSubmitBtn');
+            const errorBox = document.getElementById('accessError');
+            errorBox.classList.add('hidden');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: new FormData(form)
+                });
+                if (!response.ok) throw new Error('http_' + response.status);
+                form.classList.add('hidden');
+                document.getElementById('accessSuccess').classList.remove('hidden');
+            } catch (err) {
+                errorBox.classList.remove('hidden');
+                btn.disabled = false;
+            }
+            return false;
         }
 
         document.addEventListener('DOMContentLoaded', restoreState);
