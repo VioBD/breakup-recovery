@@ -283,42 +283,6 @@
         </div>
     </section>
 
-    <!-- ACCESS CTA -->
-    <section id="waitlist" class="bg-brand-dark text-brand-beige py-32 px-6 text-center">
-        <div class="max-w-xl mx-auto">
-            <h2 class="lang-ro text-4xl font-serif italic mb-4 leading-tight">Rezervă-ți accesul la Breakup Recovery</h2>
-            <h2 class="lang-en lang-hidden text-4xl font-serif italic mb-4 leading-tight">Reserve your spot at Breakup Recovery</h2>
-            <p class="lang-ro text-sm opacity-70 mb-8">Pregătim varianta cu abonament. Lasă-ți email-ul ca să-ți rezervi locul înainte de lansare.</p>
-            <p class="lang-en lang-hidden text-sm opacity-70 mb-8">We're preparing the subscription version. Leave your email to reserve your spot before launch.</p>
-
-            <form id="accessForm" action="https://formspree.io/f/xzebzpll" method="POST" onsubmit="return handleAccessSubmit(event)" class="space-y-4 text-left">
-                <input type="hidden" name="source" value="landing_cta">
-                <input id="accessEmail" type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none text-center">
-
-                <label class="flex items-start gap-3 text-xs opacity-80 px-2">
-                    <input id="accessConsent" type="checkbox" name="consent" required class="mt-1 shrink-0">
-                    <span class="lang-ro">Sunt de acord să fiu contactat/ă pe acest email despre acces și abonament. Vezi <a href="/privacy.html" target="_blank" class="underline">Politica de confidențialitate</a>.</span>
-                    <span class="lang-en lang-hidden">I agree to be contacted at this email about access and subscription. See our <a href="/privacy.html" target="_blank" class="underline">Privacy Policy</a>.</span>
-                </label>
-
-                <button type="submit" id="accessSubmitBtn" class="w-full bg-brand-beige text-brand-dark py-6 rounded-full font-bold text-xl hover:bg-white transition-colors uppercase tracking-widest">
-                    <span class="lang-ro">Abonează-te acum</span>
-                    <span class="lang-en lang-hidden">Subscribe now</span>
-                </button>
-            </form>
-
-            <div id="accessSuccess" class="hidden bg-brand-beige/10 border border-brand-beige/30 rounded-2xl p-8">
-                <p class="lang-ro">Ai rezervat accesul! Primești gratuit primele 15 zile de la lansare, apoi continuăm cu abonamentul. Îți trimitem toate detaliile pe email în curând.</p>
-                <p class="lang-en lang-hidden">You've reserved your spot! You get your first 15 days free at launch, then we continue with the subscription. We'll send you all the details by email soon.</p>
-            </div>
-
-            <div id="accessError" class="hidden text-xs text-red-300 mt-4">
-                <span class="lang-ro">N-am putut trimite formularul chiar acum. Încearcă din nou.</span>
-                <span class="lang-en lang-hidden">We couldn't send the form right now. Please try again.</span>
-            </div>
-        </div>
-    </section>
-
     <footer class="p-12 text-center text-[10px] uppercase tracking-[0.3em] opacity-30 font-bold italic space-x-4">
         <span>&copy; 2026 Breakup Recovery</span>
         <a href="/privacy.html" class="underline hover:opacity-100">Confidențialitate</a>
@@ -516,6 +480,8 @@
             const div = document.createElement('div');
             div.className = side === 'user'
                 ? "bg-brand-accent/30 p-4 md:p-6 rounded-2xl md:rounded-[2rem] rounded-tr-none ml-auto max-w-[85%] text-sm md:text-base shadow-sm"
+                : side === 'system'
+                ? "bg-brand-accent/50 text-brand-dark px-5 py-3 rounded-full mx-auto max-w-[90%] text-xs font-bold text-center shadow-sm"
                 : "bg-brand-dark text-brand-beige p-5 md:p-8 rounded-2xl md:rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-sm md:text-base italic whitespace-pre-wrap shadow-md leading-normal md:leading-relaxed";
             div.innerText = text;
             win.appendChild(div);
@@ -553,10 +519,9 @@
                 document.getElementById('chatInputRow').classList.remove('hidden');
 
                 const unlockMsg = currentLang === 'ro'
-                    ? "Deocamdată ai acces gratuit, cât suntem în perioada de testare. Îți trimitem detaliile pe email de îndată ce lansăm oficial. Mulțumim!"
-                    : "For now you have free access, while we're in testing. We'll send you the details by email as soon as we officially launch. Thank you!";
-                appendMessage(unlockMsg, 'ai');
-                chatHistory.push({ role: 'assistant', content: unlockMsg });
+                    ? "✓ Deocamdată ai acces gratuit, cât suntem în perioada de testare. Îți trimitem detaliile pe email de îndată ce lansăm oficial. Mulțumim!"
+                    : "✓ For now you have free access, while we're in testing. We'll send you the details by email as soon as we officially launch. Thank you!";
+                appendMessage(unlockMsg, 'system');
                 saveState();
             } catch (err) {
                 errorBox.classList.remove('hidden');
@@ -582,30 +547,6 @@
                 saveState();
             }, 1000);
             document.getElementById('decisionButtons').classList.add('hidden');
-        }
-
-        async function handleAccessSubmit(e) {
-            e.preventDefault();
-            const form = document.getElementById('accessForm');
-            const btn = document.getElementById('accessSubmitBtn');
-            const errorBox = document.getElementById('accessError');
-            errorBox.classList.add('hidden');
-            btn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: new FormData(form)
-                });
-                if (!response.ok) throw new Error('http_' + response.status);
-                form.classList.add('hidden');
-                document.getElementById('accessSuccess').classList.remove('hidden');
-            } catch (err) {
-                errorBox.classList.remove('hidden');
-                btn.disabled = false;
-            }
-            return false;
         }
 
         document.addEventListener('DOMContentLoaded', restoreState);
