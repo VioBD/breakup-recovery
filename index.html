@@ -214,12 +214,31 @@
                     <!-- Mesaje -->
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-end bg-white p-6 rounded-[2.5rem] border border-brand-dark/10 shadow-sm">
+                <div id="chatInputRow" class="flex flex-col md:flex-row gap-4 items-stretch md:items-end bg-white p-6 rounded-[2.5rem] border border-brand-dark/10 shadow-sm">
                     <textarea id="chatInput" maxlength="2000" class="w-full md:flex-1 bg-transparent border-none px-4 py-2 outline-none text-base resize-none" placeholder="..." rows="2"></textarea>
                     <button onclick="sendChatMessage()" id="btnChat" class="w-full md:w-auto bg-brand-dark text-white px-10 py-5 rounded-full font-bold hover:bg-black transition-all shadow-lg active:scale-95">
                         <span class="lang-ro">Trimite</span>
                         <span class="lang-en lang-hidden">Send</span>
                     </button>
+                </div>
+
+                <div id="paywallPrompt" class="hidden flex flex-col gap-4 items-stretch bg-white p-8 rounded-[2.5rem] border border-brand-dark/10 shadow-sm text-center">
+                    <p class="lang-ro text-sm opacity-80">Ați avut deja o conversație bogată. Pentru a continua dialogul, susține accesul la Breakup Recovery.</p>
+                    <p class="lang-en lang-hidden text-sm opacity-80">You've already had a rich conversation. To keep going, support access to Breakup Recovery.</p>
+                    <input id="paywallEmail" type="email" required placeholder="email@tău.com" class="w-full p-4 rounded-full bg-brand-beige/50 border border-brand-dark/10 outline-none text-center">
+                    <label class="flex items-start gap-3 text-xs opacity-70 px-2 text-left">
+                        <input id="paywallConsent" type="checkbox" required class="mt-1 shrink-0">
+                        <span class="lang-ro">Sunt de acord să fiu contactat/ă pe acest email. Vezi <a href="/privacy.html" target="_blank" class="underline">Politica de confidențialitate</a>.</span>
+                        <span class="lang-en lang-hidden">I agree to be contacted at this email. See our <a href="/privacy.html" target="_blank" class="underline">Privacy Policy</a>.</span>
+                    </label>
+                    <button onclick="handlePaywallSubmit()" id="paywallSubmitBtn" class="w-full bg-brand-dark text-white py-5 rounded-full font-bold uppercase tracking-widest text-sm">
+                        <span class="lang-ro">Achită 5€ și continuă</span>
+                        <span class="lang-en lang-hidden">Pay €5 and continue</span>
+                    </button>
+                    <p id="paywallError" class="hidden text-xs text-red-700">
+                        <span class="lang-ro">N-am putut trimite chiar acum. Încearcă din nou.</span>
+                        <span class="lang-en lang-hidden">Couldn't submit right now. Please try again.</span>
+                    </p>
                 </div>
 
                 <div id="decisionButtons" class="hidden pt-8 border-t border-brand-dark/10 flex flex-col md:flex-row justify-center gap-4">
@@ -273,6 +292,7 @@
             <p class="lang-en lang-hidden text-sm opacity-70 mb-8">We're preparing the subscription version. Leave your email to reserve your spot before launch.</p>
 
             <form id="accessForm" action="https://formspree.io/f/xzebzpll" method="POST" onsubmit="return handleAccessSubmit(event)" class="space-y-4 text-left">
+                <input type="hidden" name="source" value="landing_cta">
                 <input id="accessEmail" type="email" name="email" required placeholder="email@tău.com" class="w-full p-6 rounded-full bg-white/10 border border-white/10 text-white outline-none text-center">
 
                 <label class="flex items-start gap-3 text-xs opacity-80 px-2">
@@ -311,11 +331,13 @@
         let selectedObjective = "";
         let chatHistory = [];
         let messageCount = 0;
+        let paywallUnlocked = false;
+        const PAYWALL_THRESHOLD = 5;
 
         function saveState() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify({
-                    currentLang, selectedGender, selectedObjective, chatHistory, messageCount,
+                    currentLang, selectedGender, selectedObjective, chatHistory, messageCount, paywallUnlocked,
                     started: !document.getElementById('resultArea').classList.contains('hidden')
                 }));
             } catch (e) { /* storage unavailable (private mode, quota) - fail silently */ }
@@ -336,6 +358,7 @@
             selectedObjective = saved.selectedObjective || '';
             chatHistory = saved.chatHistory;
             messageCount = saved.messageCount || 0;
+            paywallUnlocked = !!saved.paywallUnlocked;
 
             setLanguage(currentLang);
 
@@ -352,6 +375,10 @@
             });
             if (messageCount >= 1) {
                 document.getElementById('decisionButtons').classList.remove('hidden');
+            }
+            if (messageCount >= PAYWALL_THRESHOLD && !paywallUnlocked) {
+                document.getElementById('chatInputRow').classList.add('hidden');
+                document.getElementById('paywallPrompt').classList.remove('hidden');
             }
         }
 
@@ -428,6 +455,13 @@
         }
 
         async function sendChatMessage() {
+            if (messageCount >= PAYWALL_THRESHOLD && !paywallUnlocked) {
+                document.getElementById('chatInputRow').classList.add('hidden');
+                document.getElementById('paywallPrompt').classList.remove('hidden');
+                document.getElementById('paywallPrompt').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
             const input = document.getElementById('chatInput');
             const btn = document.getElementById('btnChat');
             const msg = input.value;
@@ -460,6 +494,10 @@
                 if(messageCount >= 1) {
                     document.getElementById('decisionButtons').classList.remove('hidden');
                 }
+                if (messageCount >= PAYWALL_THRESHOLD && !paywallUnlocked) {
+                    document.getElementById('chatInputRow').classList.add('hidden');
+                    document.getElementById('paywallPrompt').classList.remove('hidden');
+                }
                 saveState();
             } catch (e) {
                 const errMsg = currentLang === 'ro'
@@ -482,6 +520,49 @@
             div.innerText = text;
             win.appendChild(div);
             win.scrollTop = win.scrollHeight;
+        }
+
+        async function handlePaywallSubmit() {
+            const emailInput = document.getElementById('paywallEmail');
+            const consent = document.getElementById('paywallConsent');
+            const errorBox = document.getElementById('paywallError');
+            errorBox.classList.add('hidden');
+
+            if (!emailInput.value || !consent.checked) {
+                emailInput.reportValidity();
+                consent.reportValidity();
+                return;
+            }
+
+            const btn = document.getElementById('paywallSubmitBtn');
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('email', emailInput.value);
+                formData.append('source', 'chat_paywall');
+                const response = await fetch('https://formspree.io/f/xzebzpll', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
+                });
+                if (!response.ok) throw new Error('http_' + response.status);
+
+                paywallUnlocked = true;
+                document.getElementById('paywallPrompt').classList.add('hidden');
+                document.getElementById('chatInputRow').classList.remove('hidden');
+
+                const unlockMsg = currentLang === 'ro'
+                    ? "Deocamdată ai acces gratuit, cât suntem în perioada de testare. Îți trimitem detaliile pe email de îndată ce lansăm oficial. Mulțumim!"
+                    : "For now you have free access, while we're in testing. We'll send you the details by email as soon as we officially launch. Thank you!";
+                appendMessage(unlockMsg, 'ai');
+                chatHistory.push({ role: 'assistant', content: unlockMsg });
+                saveState();
+            } catch (err) {
+                errorBox.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+            }
         }
 
         function finalDecision(type) {
