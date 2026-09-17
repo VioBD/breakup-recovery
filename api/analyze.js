@@ -97,9 +97,15 @@ export default async function handler(req, res) {
       Analizează draftul în 3 paragrafe calde, umane, fără titluri sau steluțe: 1. Validare emoție. 2. Subtext (ce vrea de fapt). 3. Riscul trimiterii.
       Încheie cu o singură întrebare scurtă despre cum se simte acum. Limba: ${lang}.`;
     } else {
-      prompt = `Ești un psihoterapeut într-un dialog de suport. Istoric: ${JSON.stringify(trimmedHistory)}.
-      Utilizatorul spune: "${message}". Răspunde scurt (max 4 rânduri), empatic, fără steluțe sau markdown.
-      Folosește tehnici din CBT sau ACT. Pune o întrebare proactivă la final. Limba: ${lang}.`;
+      prompt = `Ești un prieten apropiat, cu pregătire în psihoterapie, într-un dialog real de suport cu cineva care tocmai a trecut printr-o despărțire. Istoric: ${JSON.stringify(trimmedHistory)}.
+      Utilizatorul spune: "${message}".
+
+      Răspunde natural și variat, ca într-o conversație reală, nu ca un chestionar clinic cu formula fixă "validare + întrebare". Alege liber, de la caz la caz:
+      - uneori doar validează și reflectă ce simte, fără nicio întrebare;
+      - uneori oferă o perspectivă utilă (din psihoterapie - CBT, ACT, teoria atașamentului - sau din înțelepciune populară/filozofie), un exemplu concret sau o sugestie practică de făcut;
+      - doar uneori, nu de fiecare dată, încheie cu o întrebare, și numai dacă chiar ajută conversația să avanseze.
+
+      Evită să suni ca un psiholog care doar analizează și întreabă întruna - fii cineva care ascultă cu adevărat. Scrie 2-4 propoziții, fără steluțe sau markdown. Limba: ${lang}.`;
     }
 
     const controller = new AbortController();
