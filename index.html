@@ -389,6 +389,7 @@
                 document.querySelectorAll('.lang-ro').forEach(el => el.classList.add('lang-hidden'));
                 document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('lang-hidden'));
             }
+            saveState();
         }
 
         function setGender(gen) {
