@@ -19,65 +19,129 @@
     </script>
     <style>
         body { background-color: #F5F0E6; color: #4A1523; }
+        .lang-hidden { display: none !important; }
     </style>
 </head>
 <body class="font-sans">
     <div class="max-w-3xl mx-auto px-6 py-16">
-        <a href="/" class="text-xs font-bold uppercase tracking-widest opacity-60 hover:opacity-100">&larr; Înapoi la Breakup Recovery</a>
+        <div class="flex justify-between items-center mb-8">
+            <a href="/" class="text-xs font-bold uppercase tracking-widest opacity-60 hover:opacity-100">
+                <span class="lang-ro">&larr; Înapoi la Breakup Recovery</span>
+                <span class="lang-en lang-hidden">&larr; Back to Breakup Recovery</span>
+            </a>
+            <div class="flex gap-2 shrink-0">
+                <button onclick="setLanguage('ro')" id="btn-ro" class="bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">RO</button>
+                <button onclick="setLanguage('en')" id="btn-en" class="bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg">EN</button>
+            </div>
+        </div>
 
-        <h1 class="text-4xl font-serif italic mt-8 mb-10">Politica de confidențialitate</h1>
+        <h1 class="lang-ro text-4xl font-serif italic mt-8 mb-10">Politica de confidențialitate</h1>
+        <h1 class="lang-en lang-hidden text-4xl font-serif italic mt-8 mb-10">Privacy Policy</h1>
 
-        <p class="text-sm opacity-70 mb-10">Ultima actualizare: septembrie 2026. Această pagină explică, în termeni simpli, ce date colectăm în cadrul Breakup Recovery și de ce.</p>
+        <p class="lang-ro text-sm opacity-70 mb-10">Ultima actualizare: septembrie 2026. Această pagină explică, în termeni simpli, ce date colectăm în cadrul Breakup Recovery și de ce.</p>
+        <p class="lang-en lang-hidden text-sm opacity-70 mb-10">Last updated: September 2026. This page explains, in plain terms, what data Breakup Recovery collects and why.</p>
 
         <div class="space-y-8 text-base leading-relaxed">
             <section>
-                <h2 class="text-xl font-bold mb-2">1. Ce date colectăm</h2>
-                <ul class="list-disc pl-6 space-y-2 opacity-90">
+                <h2 class="lang-ro text-xl font-bold mb-2">1. Ce date colectăm</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">1. What data we collect</h2>
+                <ul class="lang-ro list-disc pl-6 space-y-2 opacity-90">
                     <li><strong>Adresa de email</strong>, dacă o introduci în formularul de acces/înscriere de pe pagina principală.</li>
                     <li><strong>Textul mesajelor</strong> pe care le scrii în secțiunea de analiză și conversație — trimis către un serviciu AI (Google Gemini) pentru a genera un răspuns.</li>
                     <li><strong>Statistici de utilizare anonime</strong> (ex: câte persoane vizitează pagina, din ce țară, pe ce tip de dispozitiv), fără cookie-uri și fără să putem identifica o persoană anume.</li>
                 </ul>
+                <ul class="lang-en lang-hidden list-disc pl-6 space-y-2 opacity-90">
+                    <li><strong>Your email address</strong>, if you enter it in the access/sign-up form on the main page.</li>
+                    <li><strong>The text of the messages</strong> you write in the analysis and chat section — sent to an AI service (Google Gemini) to generate a response.</li>
+                    <li><strong>Anonymous usage statistics</strong> (e.g. how many people visit the page, from which country, on what device type), without cookies and without being able to identify a specific person.</li>
+                </ul>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2">2. De ce colectăm aceste date</h2>
-                <ul class="list-disc pl-6 space-y-2 opacity-90">
+                <h2 class="lang-ro text-xl font-bold mb-2">2. De ce colectăm aceste date</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">2. Why we collect this data</h2>
+                <ul class="lang-ro list-disc pl-6 space-y-2 opacity-90">
                     <li>Email-ul: ca să te putem contacta despre accesul la aplicație, abonament și lansarea oficială.</li>
                     <li>Mesajele tale: exclusiv ca să genereze răspunsul AI din conversație. Nu sunt stocate permanent pe un server al nostru — conversația rămâne salvată doar local, în browser-ul tău, nu pe un server propriu al aplicației.</li>
                     <li>Statisticile: ca să înțelegem dacă aplicația e utilă și cum poate fi îmbunătățită.</li>
                 </ul>
+                <ul class="lang-en lang-hidden list-disc pl-6 space-y-2 opacity-90">
+                    <li>Email: so we can contact you about app access, subscription, and the official launch.</li>
+                    <li>Your messages: solely to generate the AI's response in the conversation. They are not stored permanently on a server of ours — the conversation is saved only locally, in your browser, not on an app server.</li>
+                    <li>Statistics: to understand whether the app is useful and how it can be improved.</li>
+                </ul>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2">3. Temeiul legal</h2>
-                <p class="opacity-90">Prelucrăm email-ul tău pe baza consimțământului pe care ți-l exprimi bifând căsuța din formular. Îl poți retrage oricând (vezi secțiunea 6).</p>
+                <h2 class="lang-ro text-xl font-bold mb-2">3. Temeiul legal</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">3. Legal basis</h2>
+                <p class="lang-ro opacity-90">Prelucrăm email-ul tău pe baza consimțământului pe care ți-l exprimi bifând căsuța din formular. Îl poți retrage oricând (vezi secțiunea 6).</p>
+                <p class="lang-en lang-hidden opacity-90">We process your email based on the consent you give by checking the box in the form. You can withdraw it at any time (see section 6).</p>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2">4. Cine mai are acces la aceste date</h2>
-                <ul class="list-disc pl-6 space-y-2 opacity-90">
+                <h2 class="lang-ro text-xl font-bold mb-2">4. Cine mai are acces la aceste date</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">4. Who else has access to this data</h2>
+                <ul class="lang-ro list-disc pl-6 space-y-2 opacity-90">
                     <li><strong>Formspree</strong> — serviciul care procesează formularul de email.</li>
                     <li><strong>Google (Gemini AI)</strong> — procesează textul mesajelor tale ca să genereze răspunsul.</li>
                     <li><strong>Vercel</strong> — găzduiește aplicația și colectează statisticile anonime de trafic.</li>
                 </ul>
-                <p class="opacity-90 mt-2">Nu vindem și nu închiriem datele tale către nimeni.</p>
+                <ul class="lang-en lang-hidden list-disc pl-6 space-y-2 opacity-90">
+                    <li><strong>Formspree</strong> — the service that processes the email form.</li>
+                    <li><strong>Google (Gemini AI)</strong> — processes the text of your messages to generate the response.</li>
+                    <li><strong>Vercel</strong> — hosts the app and collects anonymous traffic statistics.</li>
+                </ul>
+                <p class="lang-ro opacity-90 mt-2">Nu vindem și nu închiriem datele tale către nimeni.</p>
+                <p class="lang-en lang-hidden opacity-90 mt-2">We do not sell or rent your data to anyone.</p>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2">5. Cât timp păstrăm datele</h2>
-                <p class="opacity-90">Email-ul din formular este păstrat până la momentul lansării oficiale sau până ceri ștergerea lui, oricare survine primul. Textul conversațiilor nu e stocat de noi pe server — rămâne doar în browser-ul tău, până îl ștergi sau apeși „Începe o conversație nouă".</p>
+                <h2 class="lang-ro text-xl font-bold mb-2">5. Cât timp păstrăm datele</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">5. How long we keep the data</h2>
+                <p class="lang-ro opacity-90">Email-ul din formular este păstrat până la momentul lansării oficiale sau până ceri ștergerea lui, oricare survine primul. Textul conversațiilor nu e stocat de noi pe server — rămâne doar în browser-ul tău, până îl ștergi sau apeși „Începe o conversație nouă".</p>
+                <p class="lang-en lang-hidden opacity-90">The email from the form is kept until the official launch or until you request its deletion, whichever comes first. Conversation text is not stored by us on a server — it stays only in your browser, until you delete it or press "Start a new conversation".</p>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2">6. Drepturile tale</h2>
-                <p class="opacity-90">Poți cere oricând acces la datele tale, corectarea sau ștergerea lor, ori retragerea consimțământului. Scrie-ne la <a href="mailto:breakuprecovery.app@gmail.com" class="underline">breakuprecovery.app@gmail.com</a> și rezolvăm cererea în cel mai scurt timp posibil.</p>
+                <h2 class="lang-ro text-xl font-bold mb-2">6. Drepturile tale</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">6. Your rights</h2>
+                <p class="lang-ro opacity-90">Poți cere oricând acces la datele tale, corectarea sau ștergerea lor, ori retragerea consimțământului. Scrie-ne la <a href="mailto:breakuprecovery.app@gmail.com" class="underline">breakuprecovery.app@gmail.com</a> și rezolvăm cererea în cel mai scurt timp posibil.</p>
+                <p class="lang-en lang-hidden opacity-90">You can request access to your data, its correction or deletion, or withdraw your consent, at any time. Write to us at <a href="mailto:breakuprecovery.app@gmail.com" class="underline">breakuprecovery.app@gmail.com</a> and we'll handle your request as quickly as possible.</p>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2">7. Contact</h2>
-                <p class="opacity-90">Pentru orice întrebare legată de această politică sau de datele tale: <a href="mailto:breakuprecovery.app@gmail.com" class="underline">breakuprecovery.app@gmail.com</a>.</p>
+                <h2 class="lang-ro text-xl font-bold mb-2">7. Contact</h2>
+                <h2 class="lang-en lang-hidden text-xl font-bold mb-2">7. Contact</h2>
+                <p class="lang-ro opacity-90">Pentru orice întrebare legată de această politică sau de datele tale: <a href="mailto:breakuprecovery.app@gmail.com" class="underline">breakuprecovery.app@gmail.com</a>.</p>
+                <p class="lang-en lang-hidden opacity-90">For any question about this policy or your data: <a href="mailto:breakuprecovery.app@gmail.com" class="underline">breakuprecovery.app@gmail.com</a>.</p>
             </section>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            const btnRo = document.getElementById('btn-ro');
+            const btnEn = document.getElementById('btn-en');
+            if (lang === 'ro') {
+                btnRo.className = "bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                btnEn.className = "bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                document.querySelectorAll('.lang-ro').forEach(el => el.classList.remove('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('lang-hidden'));
+            } else {
+                btnEn.className = "bg-brand-dark text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                btnRo.className = "bg-white text-brand-dark border border-brand-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg";
+                document.querySelectorAll('.lang-ro').forEach(el => el.classList.add('lang-hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('lang-hidden'));
+            }
+        }
+
+        (function () {
+            try {
+                const saved = JSON.parse(localStorage.getItem('breakupRecoveryState'));
+                if (saved && saved.currentLang === 'en') setLanguage('en');
+            } catch (e) { /* storage unavailable - default to RO */ }
+        })();
+    </script>
 </body>
 </html>
