@@ -208,8 +208,6 @@
                     <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-ro">O perspectivă mai clară</span>
                     <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-en lang-hidden">A clearer perspective</span>
                     <div id="initialAnalysisText" class="text-base md:text-xl italic leading-normal md:leading-relaxed whitespace-pre-wrap opacity-95 font-serif"></div>
-                    <p class="lang-ro text-[10px] opacity-40 mt-4">Răspuns generat de AI. Nu înlocuiește ajutorul unui specialist.</p>
-                    <p class="lang-en lang-hidden text-[10px] opacity-40 mt-4">AI-generated response. Not a substitute for professional help.</p>
                 </div>
 
                 <div id="chatWindow" class="h-[400px] md:h-[500px] overflow-y-auto p-4 md:p-8 bg-brand-beige/20 rounded-[2rem] md:rounded-[3rem] space-y-4 md:space-y-6 border border-brand-dark/5 shadow-inner">
@@ -273,8 +271,8 @@
             <div class="p-8 bg-white/50 rounded-2xl border-2 border-brand-dark/5">
                 <h4 class="lang-ro font-bold uppercase mb-4 text-red-900">Nu înlocuiește terapia</h4>
                 <h4 class="lang-en lang-hidden font-bold uppercase mb-4 text-red-900">Not a replacement for therapy</h4>
-                <p class="opacity-70 lang-ro">Este un suport de moment pentru claritate.</p>
-                <p class="opacity-70 lang-en lang-hidden">Support for a moment of clarity.</p>
+                <p class="opacity-70 lang-ro">Este un suport de moment din partea unui AI pentru claritate.</p>
+                <p class="opacity-70 lang-en lang-hidden">Support from an AI for a moment of clarity.</p>
             </div>
             <div class="p-8 bg-white/50 rounded-2xl">
                 <h4 class="lang-ro font-bold uppercase mb-4">Fără soluții magice</h4>
@@ -512,15 +510,6 @@
                 : "bg-brand-dark text-brand-beige p-5 md:p-8 rounded-2xl md:rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-sm md:text-base italic whitespace-pre-wrap shadow-md leading-normal md:leading-relaxed";
             div.innerText = text;
             win.appendChild(div);
-
-            if (side === 'ai') {
-                const disclaimer = document.createElement('p');
-                disclaimer.className = "text-[10px] opacity-40 mr-auto max-w-[95%] -mt-2";
-                disclaimer.innerText = currentLang === 'ro'
-                    ? "Răspuns generat de AI. Nu înlocuiește ajutorul unui specialist."
-                    : "AI-generated response. Not a substitute for professional help.";
-                win.appendChild(disclaimer);
-            }
 
             win.scrollTop = win.scrollHeight;
         }
