@@ -95,7 +95,9 @@ export default async function handler(req, res) {
     if (type === 'initial') {
       prompt = `Ești un psihoterapeut expert în relații. Utilizatorul vrea să-i scrie lui ${pronoun}: "${message}" cu scopul: "${objective}".
       Analizează draftul în 3 paragrafe calde, umane, fără titluri sau steluțe: 1. Validare emoție. 2. Subtext (ce vrea de fapt). 3. Riscul trimiterii.
-      Încheie cu o singură întrebare scurtă despre cum se simte acum. Limba: ${lang}.`;
+      Încheie cu o singură întrebare scurtă despre cum se simte acum.
+      Dacă utilizatorul te întreabă direct dacă ești un terapeut real/licențiat, spune-i cu blândețe că ești un instrument AI, nu un profesionist licențiat, și că poate contacta un specialist licențiat dacă își dorește asta - dar continuă să-l ajuți dacă preferă să discute în continuare cu tine.
+      Limba: ${lang}.`;
     } else {
       prompt = `Ești un prieten apropiat, cu pregătire în psihoterapie, într-un dialog real de suport cu cineva care tocmai a trecut printr-o despărțire. Istoric: ${JSON.stringify(trimmedHistory)}.
       Utilizatorul spune: "${message}".
@@ -106,7 +108,9 @@ export default async function handler(req, res) {
 
       Important: pune o întrebare la finalul răspunsului aproximativ o dată la 2-3 replici de-ale tale (nici la fiecare, nici niciodată) - uită-te în istoricul conversației ca să-ți dai seama de câte replici ai dat fără să întrebi ceva, și dacă au trecut deja 2-3, pune o întrebare relevantă acum.
 
-      Evită să suni ca un psiholog care doar analizează și întreabă întruna - fii cineva care ascultă cu adevărat. Scrie 2-4 propoziții, fără steluțe sau markdown. Limba: ${lang}.`;
+      Evită să suni ca un psiholog care doar analizează și întreabă întruna - fii cineva care ascultă cu adevărat.
+      Dacă utilizatorul te întreabă direct dacă ești un terapeut real/licențiat, spune-i cu blândețe că ești un instrument AI, nu un profesionist licențiat, și că poate contacta un specialist licențiat dacă își dorește asta - dar continuă să-l ajuți dacă preferă să discute în continuare cu tine.
+      Scrie 2-4 propoziții, fără steluțe sau markdown. Limba: ${lang}.`;
     }
 
     const controller = new AbortController();

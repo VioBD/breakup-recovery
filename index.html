@@ -86,7 +86,7 @@
                     <span class="step-number text-brand-accent">02</span>
                     <h3 class="lang-ro text-xl font-bold italic underline">Înțelege mai clar situația</h3>
                     <h3 class="lang-en lang-hidden text-xl font-bold italic underline">Understand the situation</h3>
-                    <p class="lang-ro opacity-70 text-sm leading-relaxed">Primești o întrebare relevantă și un pas practic bazat pe psihoterapie.</p>
+                    <p class="lang-ro opacity-70 text-sm leading-relaxed">Primești o întrebare relevantă și un pas practic, inspirat din principii de psihologie.</p>
                     <p class="lang-en lang-hidden opacity-70 text-sm leading-relaxed">Receive a relevant question and a practical step.</p>
                 </div>
                 <div class="space-y-4">
@@ -198,16 +198,18 @@
             <div id="resultArea" class="hidden space-y-8">
                 <div id="resumeBanner" class="hidden flex flex-col md:flex-row gap-3 items-center justify-between bg-brand-accent/30 px-6 py-4 rounded-2xl text-xs">
                     <span class="lang-ro">Am reluat conversația ta anterioară.</span>
-                    <span class="lang-en lang-hidden">We picked up your previous conversation.</span>
+                    <span class="lang-en lang-hidden">We picked up where you left off.</span>
                     <button onclick="resetConversation()" class="underline font-bold shrink-0">
                         <span class="lang-ro">Începe o conversație nouă</span>
                         <span class="lang-en lang-hidden">Start a new conversation</span>
                     </button>
                 </div>
                 <div class="bg-brand-dark text-brand-beige p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] shadow-2xl border-l-8 border-brand-accent">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-ro">Perspectiva Psihoterapeutului</span>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-en lang-hidden">Psychotherapist's Perspective</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-ro">O perspectivă mai clară</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-4 md:mb-6 block lang-en lang-hidden">A clearer perspective</span>
                     <div id="initialAnalysisText" class="text-base md:text-xl italic leading-normal md:leading-relaxed whitespace-pre-wrap opacity-95 font-serif"></div>
+                    <p class="lang-ro text-[10px] opacity-40 mt-4">Răspuns generat de AI. Nu înlocuiește ajutorul unui specialist.</p>
+                    <p class="lang-en lang-hidden text-[10px] opacity-40 mt-4">AI-generated response. Not a substitute for professional help.</p>
                 </div>
 
                 <div id="chatWindow" class="h-[400px] md:h-[500px] overflow-y-auto p-4 md:p-8 bg-brand-beige/20 rounded-[2rem] md:rounded-[3rem] space-y-4 md:space-y-6 border border-brand-dark/5 shadow-inner">
@@ -272,7 +274,7 @@
                 <h4 class="lang-ro font-bold uppercase mb-4 text-red-900">Nu înlocuiește terapia</h4>
                 <h4 class="lang-en lang-hidden font-bold uppercase mb-4 text-red-900">Not a replacement for therapy</h4>
                 <p class="opacity-70 lang-ro">Este un suport de moment pentru claritate.</p>
-                <p class="opacity-70 lang-en lang-hidden">A momentary support for clarity.</p>
+                <p class="opacity-70 lang-en lang-hidden">Support for a moment of clarity.</p>
             </div>
             <div class="p-8 bg-white/50 rounded-2xl">
                 <h4 class="lang-ro font-bold uppercase mb-4">Fără soluții magice</h4>
@@ -286,7 +288,32 @@
     <footer class="p-12 text-center text-[10px] uppercase tracking-[0.3em] opacity-30 font-bold italic space-x-4">
         <span>&copy; 2026 Breakup Recovery</span>
         <a href="/privacy.html" class="underline hover:opacity-100">Confidențialitate</a>
+        <button onclick="openUrgentHelp()" class="underline hover:opacity-100">
+            <span class="lang-ro">Ai nevoie de ajutor urgent?</span>
+            <span class="lang-en lang-hidden">Need urgent help?</span>
+        </button>
     </footer>
+
+    <!-- URGENT HELP MODAL -->
+    <div id="urgentHelpModal" class="hidden fixed inset-0 z-[100] bg-brand-dark/80 flex items-center justify-center p-6" onclick="if(event.target === this) closeUrgentHelp()">
+        <div class="bg-brand-beige text-brand-dark max-w-md w-full rounded-[2rem] p-8 md:p-10 relative not-italic normal-case tracking-normal text-left">
+            <button onclick="closeUrgentHelp()" class="absolute top-6 right-6 text-2xl leading-none opacity-50 hover:opacity-100">&times;</button>
+            <h3 class="lang-ro text-2xl font-serif italic mb-6">Ai nevoie de ajutor urgent?</h3>
+            <h3 class="lang-en lang-hidden text-2xl font-serif italic mb-6">Need urgent help?</h3>
+            <div class="lang-ro space-y-3 text-sm leading-relaxed">
+                <p>— Pericol imediat: <strong>112</strong> (non-stop, gratuit, Moldova și România)</p>
+                <p>— Moldova: Linia Verde pentru Prevenirea Suicidului — chat pe pentruviata.md sau <strong>060806623</strong> (luni–vineri, 19:00–21:00)</p>
+                <p>— România: Telefonul pentru prevenirea suicidului — <strong>0800 801 200</strong> (gratuit, non-stop)</p>
+                <p class="opacity-70">Nu ești singur/ă.</p>
+            </div>
+            <div class="lang-en lang-hidden space-y-3 text-sm leading-relaxed">
+                <p>— Immediate danger: call your local emergency number (<strong>112</strong> across the EU and Moldova, <strong>911</strong> in the US/Canada)</p>
+                <p>— Find a helpline in your country at <strong>findahelpline.com</strong></p>
+                <p>— In the US: call or text <strong>988</strong></p>
+                <p class="opacity-70">You don't have to go through this alone.</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         const STORAGE_KEY = 'breakupRecoveryState';
@@ -485,6 +512,16 @@
                 : "bg-brand-dark text-brand-beige p-5 md:p-8 rounded-2xl md:rounded-[2rem] rounded-tl-none mr-auto max-w-[95%] text-sm md:text-base italic whitespace-pre-wrap shadow-md leading-normal md:leading-relaxed";
             div.innerText = text;
             win.appendChild(div);
+
+            if (side === 'ai') {
+                const disclaimer = document.createElement('p');
+                disclaimer.className = "text-[10px] opacity-40 mr-auto max-w-[95%] -mt-2";
+                disclaimer.innerText = currentLang === 'ro'
+                    ? "Răspuns generat de AI. Nu înlocuiește ajutorul unui specialist."
+                    : "AI-generated response. Not a substitute for professional help.";
+                win.appendChild(disclaimer);
+            }
+
             win.scrollTop = win.scrollHeight;
         }
 
@@ -547,6 +584,14 @@
                 saveState();
             }, 1000);
             document.getElementById('decisionButtons').classList.add('hidden');
+        }
+
+        function openUrgentHelp() {
+            document.getElementById('urgentHelpModal').classList.remove('hidden');
+        }
+
+        function closeUrgentHelp() {
+            document.getElementById('urgentHelpModal').classList.add('hidden');
         }
 
         document.addEventListener('DOMContentLoaded', restoreState);
